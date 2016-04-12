@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author user
+ * @author dias, hiyandao101
  */
 public class JavaProjectSample extends Application {
     
