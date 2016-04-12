@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 
 // This code was added by hackerfrommars xD;
 
+
+// this line edited by oiwo;
 public class JavaProjectSample extends Application {
     
     @Override
