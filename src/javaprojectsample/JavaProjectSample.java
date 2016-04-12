@@ -17,6 +17,9 @@ import javafx.stage.Stage;
  *
  * @author dias, hiyandao101
  */
+
+// This code was added by hackerfrommars xD;
+
 public class JavaProjectSample extends Application {
     
     @Override
