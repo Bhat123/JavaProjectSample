@@ -36,28 +36,28 @@ public class JavaProjectSample extends Application {
     ImageView head;
     
     
-    private final Rectangle2D TANK_DOWN = new Rectangle2D(26, 1, 60, 85);
-    private final Rectangle2D TANK_UP = new Rectangle2D(796, 96, 60, 85);
-    private final Rectangle2D TANK_RIGHT = new Rectangle2D(664, 200, 98, 56);
-    private final Rectangle2D TANK_LEFT = new Rectangle2D(890, 18, 94, 56);
+//    private final Rectangle2D TANK_DOWN = new Rectangle2D(26, 1, 60, 85);
+//    private final Rectangle2D TANK_UP = new Rectangle2D(796, 96, 60, 85);
+//    private final Rectangle2D TANK_RIGHT = new Rectangle2D(664, 200, 98, 56);
+//    private final Rectangle2D TANK_LEFT = new Rectangle2D(890, 18, 94, 56);
     
     
     @Override
     public void start(Stage primaryStage) throws Exception {
     AnchorPane ancPane = new AnchorPane();  
     
-    imgHead = new Image("file:head.png");
-    imgFile = new Image("file:3.png");
+    imgHead = new Image("file:green_head.png");
+    imgFile = new Image("file:green_body.png");
     head = new ImageView(imgHead);
-    head.setFitHeight(30);
-    head.setFitWidth(30);
-    head.setX(10);
-    head.setY(10);
-//    head.getTransforms().add(new Rotate(45));
+//    head.setFitHeight(30);
+    head.setFitWidth(35);
+//    head.setX(10);
+//    head.setY(10);
+//    head.getTransforms().add(new Rotate(180, 25, 25));
     tank = new ImageView(imgFile);
-    tank.setViewport(TANK_DOWN);
-    tank.setFitHeight(50);
-    tank.setFitWidth(50);
+//    tank.setViewport(TANK_DOWN);
+//    tank.setFitHeight(50);
+//    tank.setFitWidth(50);
     ancPane.getChildren().addAll(tank, head);
     Scene scene = new Scene(ancPane, 500, 200, Color.GREEN); 
     primaryStage.setScene(scene);
@@ -69,7 +69,7 @@ public class JavaProjectSample extends Application {
             System.out.println(tank.getTranslateX() + ": X");
             System.out.println(tank.getTranslateY() + ": Y");
             if(keyEvent.getCode().toString() == "RIGHT"){
-                tank.setViewport(TANK_RIGHT);
+//                tank.setViewport(TANK_RIGHT);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
@@ -80,7 +80,7 @@ public class JavaProjectSample extends Application {
             
             if(keyEvent.getCode().toString() == "UP"){
 
-                tank.setViewport(TANK_UP);
+//                tank.setViewport(TANK_UP);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
@@ -89,7 +89,7 @@ public class JavaProjectSample extends Application {
                 trTank.play();
             }
             if(keyEvent.getCode().toString() == "DOWN"){
-                tank.setViewport(TANK_DOWN);
+//                tank.setViewport(TANK_DOWN);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
@@ -98,7 +98,7 @@ public class JavaProjectSample extends Application {
                 trTank.play();
             }
             if(keyEvent.getCode().toString() == "LEFT"){
-                tank.setViewport(TANK_LEFT);
+//                tank.setViewport(TANK_LEFT);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
