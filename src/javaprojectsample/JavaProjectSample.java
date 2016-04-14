@@ -47,7 +47,6 @@ public class JavaProjectSample extends Application {
     public void start(Stage primaryStage) throws Exception {
     AnchorPane ancPane = new AnchorPane();  
         System.out.println("kjsabdkasbdkbh");
-        System.out.println("askjdnkjasdnkj");
         
      Rectangle rect = new Rectangle (100, 40, 100, 100);
      rect.setArcHeight(50);
@@ -59,7 +58,7 @@ public class JavaProjectSample extends Application {
      RotateTransition rt = new RotateTransition(Duration.millis(300), head);
      rt.setByAngle(180);
      rt.setCycleCount(4);
-     rt.setAutoReverse(true);
+//     rt.setAutoReverse(true);
  
      rt.play();
         
