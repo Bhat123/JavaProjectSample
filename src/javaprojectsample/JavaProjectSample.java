@@ -58,7 +58,7 @@ public class JavaProjectSample extends Application {
      RotateTransition rt = new RotateTransition(Duration.millis(300), head);
      rt.setByAngle(180);
      rt.setCycleCount(4);
-     rt.setAutoReverse(true);
+//     rt.setAutoReverse(true);
  
      rt.play();
         
