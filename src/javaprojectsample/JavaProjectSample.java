@@ -33,14 +33,17 @@ import javafx.util.Duration;
 public class JavaProjectSample extends Application {
     Image imgFile;
     Image imgHead;
+    Image imgFileU;
+    Image imgFileR;
+    Image imgFileL;
     ImageView tank;
     ImageView head;
     
     
-//    private final Rectangle2D TANK_DOWN = new Rectangle2D(26, 1, 60, 85);
-//    private final Rectangle2D TANK_UP = new Rectangle2D(796, 96, 60, 85);
-//    private final Rectangle2D TANK_RIGHT = new Rectangle2D(664, 200, 98, 56);
-//    private final Rectangle2D TANK_LEFT = new Rectangle2D(890, 18, 94, 56);
+    private final Rectangle2D TANK_DOWN = new Rectangle2D(0, 0, 49, 71);
+    private final Rectangle2D TANK_UP = new Rectangle2D(0, 0, 49, 71);
+    private final Rectangle2D TANK_RIGHT = new Rectangle2D(0, 0, 71, 49);
+    private final Rectangle2D TANK_LEFT = new Rectangle2D(0, 0, 71, 49);
     
     
     @Override
@@ -66,12 +69,15 @@ public class JavaProjectSample extends Application {
         
     imgHead = new Image("file:green_head.png");
     imgFile = new Image("file:green_body.png");
+    imgFileU = new Image("file:green_body_u.png");
+    imgFileR = new Image("file:green_body_r.png");
+    imgFileL = new Image("file:green_body_l.png");
     head = new ImageView(imgHead);
 //    head.setFitHeight(30);
     head.setFitWidth(34);
     head.setLayoutX(6);
     head.setLayoutY(1);
-    head.getTransforms().add(new Rotate(45, 17, 24));
+//    head.getTransforms().add(new Rotate(45, 17, 24));
     tank = new ImageView(imgFile);
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
@@ -88,6 +94,7 @@ public class JavaProjectSample extends Application {
             System.out.println(tank.getTranslateY() + ": Y");
             if(keyEvent.getCode().toString() == "RIGHT"){
 //                tank.setViewport(TANK_RIGHT);
+                tank.setImage(imgFileR);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
@@ -105,6 +112,7 @@ public class JavaProjectSample extends Application {
             if(keyEvent.getCode().toString() == "UP"){
 
 //                tank.setViewport(TANK_UP);
+                tank.setImage(imgFile);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
@@ -120,6 +128,7 @@ public class JavaProjectSample extends Application {
             }
             if(keyEvent.getCode().toString() == "DOWN"){
 //                tank.setViewport(TANK_DOWN);
+                tank.setImage(imgFile);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
@@ -135,6 +144,7 @@ public class JavaProjectSample extends Application {
             }
             if(keyEvent.getCode().toString() == "LEFT"){
 //                tank.setViewport(TANK_LEFT);
+                tank.setImage(imgFileR);
                 TranslateTransition trTank = new TranslateTransition();
                 trTank.setDuration(Duration.millis(200));
                 trTank.setNode(tank);
