@@ -46,7 +46,8 @@ public class JavaProjectSample extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     AnchorPane ancPane = new AnchorPane();
-        System.out.println("Modified by oiwo");
+
+        System.out.println("Modified by HFM");
 //     Rectangle rect = new Rectangle (100, 40, 100, 100);
 //     rect.setArcHeight(50);
 //     rect.setArcWidth(50);
@@ -70,7 +71,7 @@ public class JavaProjectSample extends Application {
     head.setFitWidth(34);
     head.setLayoutX(6);
     head.setLayoutY(1);
-//    head.getTransforms().add(new Rotate(45, 17, 24));
+    head.getTransforms().add(new Rotate(45, 17, 24));
     tank = new ImageView(imgFile);
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
