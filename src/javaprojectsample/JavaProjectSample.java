@@ -47,19 +47,19 @@ public class JavaProjectSample extends Application {
     public void start(Stage primaryStage) throws Exception {
     AnchorPane ancPane = new AnchorPane();
         
-     Rectangle rect = new Rectangle (100, 40, 100, 100);
-     rect.setArcHeight(50);
-     rect.setArcWidth(50);
-     rect.setFill(Color.VIOLET);
-     
-     rect.setX(100);
-        
-     RotateTransition rt = new RotateTransition(Duration.millis(300), head);
-     rt.setByAngle(180);
-     rt.setCycleCount(4);
+//     Rectangle rect = new Rectangle (100, 40, 100, 100);
+//     rect.setArcHeight(50);
+//     rect.setArcWidth(50);
+//     rect.setFill(Color.VIOLET);
+//     
+//     rect.setX(100);
+//        
+//     RotateTransition rt = new RotateTransition(Duration.millis(300), head);
+//     rt.setByAngle(180);
+//     rt.setCycleCount(4);
 //     rt.setAutoReverse(true);
  
-     rt.play();
+//     rt.play();
         
         
         
@@ -67,15 +67,15 @@ public class JavaProjectSample extends Application {
     imgFile = new Image("file:green_body.png");
     head = new ImageView(imgHead);
 //    head.setFitHeight(30);
-    head.setFitWidth(35);
-    head.setX(8);
-    head.setY(8);
-//    head.getTransforms().add(new Rotate(180, 25, 25));
+    head.setFitWidth(34);
+    head.setLayoutX(6);
+    head.setLayoutY(1);
+    head.getTransforms().add(new Rotate(45, 17, 24));
     tank = new ImageView(imgFile);
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
 //    tank.setFitWidth(50);
-    ancPane.getChildren().addAll(tank, head, rect);
+    ancPane.getChildren().addAll(tank, head);
     Scene scene = new Scene(ancPane, 500, 200, Color.GREEN); 
     primaryStage.setScene(scene);
     primaryStage.show();
