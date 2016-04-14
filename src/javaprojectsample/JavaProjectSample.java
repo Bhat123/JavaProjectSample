@@ -47,6 +47,7 @@ public class JavaProjectSample extends Application {
     public void start(Stage primaryStage) throws Exception {
     AnchorPane ancPane = new AnchorPane();  
         System.out.println("kjsabdkasbdkbh");
+        System.out.println("askjdnkjasdnkj");
         
      Rectangle rect = new Rectangle (100, 40, 100, 100);
      rect.setArcHeight(50);
