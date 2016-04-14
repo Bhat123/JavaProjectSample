@@ -5,6 +5,7 @@
  */
 package javaprojectsample;
 
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -45,20 +46,37 @@ public class JavaProjectSample extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     AnchorPane ancPane = new AnchorPane();  
-    
+        System.out.println("kjsabdkasbdkbh");
+        
+     Rectangle rect = new Rectangle (100, 40, 100, 100);
+     rect.setArcHeight(50);
+     rect.setArcWidth(50);
+     rect.setFill(Color.VIOLET);
+     
+     rect.setX(100);
+        
+     RotateTransition rt = new RotateTransition(Duration.millis(300), head);
+     rt.setByAngle(180);
+     rt.setCycleCount(4);
+     rt.setAutoReverse(true);
+ 
+     rt.play();
+        
+        
+        
     imgHead = new Image("file:green_head.png");
     imgFile = new Image("file:green_body.png");
     head = new ImageView(imgHead);
 //    head.setFitHeight(30);
     head.setFitWidth(35);
-//    head.setX(10);
-//    head.setY(10);
+    head.setX(8);
+    head.setY(8);
 //    head.getTransforms().add(new Rotate(180, 25, 25));
     tank = new ImageView(imgFile);
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
 //    tank.setFitWidth(50);
-    ancPane.getChildren().addAll(tank, head);
+    ancPane.getChildren().addAll(tank, head, rect);
     Scene scene = new Scene(ancPane, 500, 200, Color.GREEN); 
     primaryStage.setScene(scene);
     primaryStage.show();
@@ -76,6 +94,12 @@ public class JavaProjectSample extends Application {
                 trTank.setFromX(tank.getTranslateX());
                 trTank.setToX(tank.getTranslateX()+50);
                 trTank.play();
+                TranslateTransition trHead = new TranslateTransition();
+                trHead.setDuration(Duration.millis(200));
+                trHead.setNode(head);
+                trHead.setFromX(head.getTranslateX());
+                trHead.setToX(head.getTranslateX()+50);
+                trHead.play();
             }
             
             if(keyEvent.getCode().toString() == "UP"){
@@ -87,6 +111,12 @@ public class JavaProjectSample extends Application {
                 trTank.setFromY(tank.getTranslateY());
                 trTank.setToY(tank.getTranslateY()-50);
                 trTank.play();
+                TranslateTransition trHead = new TranslateTransition();
+                trHead.setDuration(Duration.millis(200));
+                trHead.setNode(head);
+                trHead.setFromY(head.getTranslateY());
+                trHead.setToY(head.getTranslateY()-50);
+                trHead.play();
             }
             if(keyEvent.getCode().toString() == "DOWN"){
 //                tank.setViewport(TANK_DOWN);
@@ -96,6 +126,12 @@ public class JavaProjectSample extends Application {
                 trTank.setFromY(tank.getTranslateY());
                 trTank.setToY(tank.getTranslateY()+50);
                 trTank.play();
+                TranslateTransition trHead = new TranslateTransition();
+                trHead.setDuration(Duration.millis(200));
+                trHead.setNode(head);
+                trHead.setFromY(head.getTranslateY());
+                trHead.setToY(head.getTranslateY()+50);
+                trHead.play();
             }
             if(keyEvent.getCode().toString() == "LEFT"){
 //                tank.setViewport(TANK_LEFT);
@@ -105,6 +141,12 @@ public class JavaProjectSample extends Application {
                 trTank.setFromX(tank.getTranslateX());
                 trTank.setToX(tank.getTranslateX()-50);
                 trTank.play();
+                TranslateTransition trHead = new TranslateTransition();
+                trHead.setDuration(Duration.millis(200));
+                trHead.setNode(head);
+                trHead.setFromX(head.getTranslateX());
+                trHead.setToX(head.getTranslateX()-50);
+                trHead.play();
             }               
         }
     });
