@@ -25,6 +25,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.RED;
 
 /**
  *
@@ -157,9 +159,22 @@ public class JavaProjectSample extends Application {
                 trHead.setFromX(head.getTranslateX());
                 trHead.setToX(head.getTranslateX()-50);
                 trHead.play();
-            }               
+            }                
+            if(keyEvent.getCode().toString() == "SPACE"){
+                Rectangle bullet = new Rectangle(5,5,RED);
+                bullet.setX(head.getTranslateX()+20);
+                bullet.setY(head.getTranslateY()+80);
+                TranslateTransition trBullet = new TranslateTransition(Duration.millis(1000),bullet);
+                trBullet.setToY(500);
+                trBullet.play();
+                ancPane.getChildren().add(bullet);
+//                ancPane.getChildren().remove(bullet);            
+            }
         }
     });
+    
+    
+    
 
 }
 
@@ -170,5 +185,7 @@ public class JavaProjectSample extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    
     
 }
