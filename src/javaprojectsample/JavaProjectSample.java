@@ -195,7 +195,7 @@ public class JavaProjectSample extends Application {
                 }
             }
         });
-
+        
     }
 
     /**
