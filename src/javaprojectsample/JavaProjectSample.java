@@ -40,8 +40,10 @@ public class JavaProjectSample extends Application {
     Image imgFileU;
     Image imgFileR;
     Image imgFileL;
+    Image imgBullet;
     ImageView tank;
     ImageView head;
+    ImageView bullet;
     int side = 4;
 
     private final Rectangle2D TANK_DOWN = new Rectangle2D(0, 0, 49, 71);
@@ -73,6 +75,8 @@ public class JavaProjectSample extends Application {
         imgFileR = new Image("file:final_right.png");
         imgFileL = new Image("file:final_left.png");
         head = new ImageView(imgHead);
+        imgBullet = new Image("file:bullet.png");
+        bullet = new ImageView(imgBullet);
 //    head.setFitHeight(30);
         head.setFitWidth(34);
         head.setLayoutX(6);
@@ -132,7 +136,7 @@ public class JavaProjectSample extends Application {
                         side = 2;
                     }else {
                         TranslateTransition trTank = new TranslateTransition();
-                        trTank.setDuration(Duration.millis(200));
+                        trTank.setDuration(Duration.millis(500));
                         trTank.setNode(tank);
                         trTank.setFromY(tank.getTranslateY());
                         trTank.setToY(tank.getTranslateY() - 50);
@@ -154,7 +158,7 @@ public class JavaProjectSample extends Application {
                         side = 4;
                     } else {
                         TranslateTransition trTank = new TranslateTransition();
-                        trTank.setDuration(Duration.millis(200));
+                        trTank.setDuration(Duration.millis(500));
                         trTank.setNode(tank);
                         trTank.setFromY(tank.getTranslateY());
                         trTank.setToY(tank.getTranslateY() + 50);
@@ -176,7 +180,7 @@ public class JavaProjectSample extends Application {
                         side = 3;
                     } else {
                         TranslateTransition trTank = new TranslateTransition();
-                        trTank.setDuration(Duration.millis(200));
+                        trTank.setDuration(Duration.millis(500));
                         trTank.setNode(tank);
                         trTank.setFromX(tank.getTranslateX());
                         trTank.setToX(tank.getTranslateX() - 50);
@@ -184,14 +188,60 @@ public class JavaProjectSample extends Application {
                     }
                 }
                 if (keyEvent.getCode().toString() == "SPACE") {
-                    Rectangle bullet = new Rectangle(5, 5, RED);
-                    bullet.setX(head.getTranslateX() + 20);
-                    bullet.setY(head.getTranslateY() + 80);
-                    TranslateTransition trBullet = new TranslateTransition(Duration.millis(1000), bullet);
-                    trBullet.setToY(500);
+                    
+                    if(keyEvent.getCode().toString() == "SPACE"){
+                
+                    bullet.setFitHeight(20);
+                    bullet.setFitWidth(20);
+                    if(side==1){
+                    TranslateTransition trBullet = new TranslateTransition();
+                    trBullet.setDuration(Duration.millis(1000));
+                    trBullet.setNode(bullet);
+                    trBullet.setFromX(tank.getTranslateX()+64);
+                    trBullet.setFromY(tank.getTranslateY()+34);
+                    trBullet.setToX(tank.getTranslateX()+2000);
+                    trBullet.setToY(tank.getTranslateY()+34);
                     trBullet.play();
                     ancPane.getChildren().add(bullet);
-//                ancPane.getChildren().remove(bullet);            
+                    System.out.println("askdjbagsd");
+                    }
+                    else if(side==2){
+                    TranslateTransition trBullet = new TranslateTransition();
+                    trBullet.setDuration(Duration.millis(1000));
+                    trBullet.setNode(bullet);
+                    trBullet.setFromX(tank.getTranslateX()+14);
+                    trBullet.setFromY(tank.getTranslateY()-18);
+                    trBullet.setToX(tank.getTranslateX()+14);
+                    trBullet.setToY(tank.getTranslateY()-2000);
+                    trBullet.play();
+                    ancPane.getChildren().add(bullet);
+                    System.out.println("askdjbagsd");
+                    }
+                    else if(side==3){
+                    TranslateTransition trBullet = new TranslateTransition();
+                    trBullet.setDuration(Duration.millis(1000));
+                    trBullet.setNode(bullet);
+                    trBullet.setFromX(tank.getTranslateX()-36);
+                    trBullet.setFromY(tank.getTranslateY()+33);
+                    trBullet.setToY(tank.getTranslateY()+33);
+                    trBullet.setToX(tank.getTranslateX()-2000);
+                    trBullet.play();
+                    ancPane.getChildren().add(bullet);
+                    System.out.println("askdjbagsd");
+                    }
+                    else if(side==4){
+                    TranslateTransition trBullet = new TranslateTransition();
+                    trBullet.setDuration(Duration.millis(1000));
+                    trBullet.setNode(bullet);
+                    trBullet.setFromX(tank.getTranslateX()+13);
+                    trBullet.setFromY(tank.getTranslateY()+85);
+                    trBullet.setToX(tank.getTranslateX());
+                    trBullet.setToY(tank.getTranslateY()+2000);
+                    trBullet.play();
+                    ancPane.getChildren().add(bullet);
+                    System.out.println("askdjbagsd");
+                    }
+            }            
                 }
             }
         });
