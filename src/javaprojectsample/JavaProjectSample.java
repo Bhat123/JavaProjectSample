@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -70,10 +71,10 @@ public class JavaProjectSample extends Application {
         
         
     imgHead = new Image("file:green_head.png");
-    imgFile = new Image("file:green_body.png");
-    imgFileU = new Image("file:green_body_u.png");
-    imgFileR = new Image("file:green_body_r.png");
-    imgFileL = new Image("file:green_body_l.png");
+    imgFile = new Image("file:final_body.png");
+    imgFileU = new Image("file:final_up.png");
+    imgFileR = new Image("file:final_right.png");
+    imgFileL = new Image("file:final_left.png");
     head = new ImageView(imgHead);
 //    head.setFitHeight(30);
     head.setFitWidth(34);
@@ -84,13 +85,13 @@ public class JavaProjectSample extends Application {
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
 //    tank.setFitWidth(50);
-    ancPane.getChildren().addAll(tank, head);
+    ancPane.getChildren().addAll(tank);
     Scene scene = new Scene(ancPane, 500, 200, Color.GREEN); 
     primaryStage.setScene(scene);
     primaryStage.show();
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
     
-        @Override
+            @Override
         public void handle(KeyEvent keyEvent) {
             System.out.println(tank.getTranslateX() + ": X");
             System.out.println(tank.getTranslateY() + ": Y");
@@ -109,8 +110,8 @@ public class JavaProjectSample extends Application {
                 trHead.setFromX(head.getTranslateX());
                 trHead.setToX(head.getTranslateX()+50);
                 trHead.play();
-            }
-            
+                        }
+
             if(keyEvent.getCode().toString() == "UP"){
 
 //                tank.setViewport(TANK_UP);
@@ -171,8 +172,8 @@ public class JavaProjectSample extends Application {
 //                ancPane.getChildren().remove(bullet);            
             }
         }
-    });
-    
+        });
+
     
     
 
