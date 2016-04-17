@@ -34,6 +34,7 @@ import static javafx.scene.paint.Color.RED;
  * @author hiyandao101
  */
 public class JavaProjectSample extends Application {
+
     Image imgFile;
     Image imgHead;
     Image imgFileU;
@@ -41,17 +42,16 @@ public class JavaProjectSample extends Application {
     Image imgFileL;
     ImageView tank;
     ImageView head;
-    
-    
+    int side = 4;
+
     private final Rectangle2D TANK_DOWN = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_UP = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_RIGHT = new Rectangle2D(0, 0, 71, 49);
     private final Rectangle2D TANK_LEFT = new Rectangle2D(0, 0, 71, 49);
-    
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-    AnchorPane ancPane = new AnchorPane();
+        AnchorPane ancPane = new AnchorPane();
 
         System.out.println("Modified by HFM");
 //     Rectangle rect = new Rectangle (100, 40, 100, 100);
@@ -65,128 +65,145 @@ public class JavaProjectSample extends Application {
 //     rt.setByAngle(180);
 //     rt.setCycleCount(4);
 //     rt.setAutoReverse(true);
- 
+
 //     rt.play();
-        
-        
-        
-    imgHead = new Image("file:green_head.png");
-    imgFile = new Image("file:final_body.png");
-    imgFileU = new Image("file:final_up.png");
-    imgFileR = new Image("file:final_right.png");
-    imgFileL = new Image("file:final_left.png");
-    head = new ImageView(imgHead);
+        imgHead = new Image("file:green_head.png");
+        imgFile = new Image("file:final_body.png");
+        imgFileU = new Image("file:final_up.png");
+        imgFileR = new Image("file:final_right.png");
+        imgFileL = new Image("file:final_left.png");
+        head = new ImageView(imgHead);
 //    head.setFitHeight(30);
-    head.setFitWidth(34);
-    head.setLayoutX(6);
-    head.setLayoutY(1);
+        head.setFitWidth(34);
+        head.setLayoutX(6);
+        head.setLayoutY(1);
 //    head.getTransforms().add(new Rotate(45, 17, 24));
-    tank = new ImageView(imgFile);
+        tank = new ImageView(imgFile);
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
 //    tank.setFitWidth(50);
-    ancPane.getChildren().addAll(tank);
-    Scene scene = new Scene(ancPane, 500, 200, Color.GREEN); 
-    primaryStage.setScene(scene);
-    primaryStage.show();
-    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-    
-            @Override
-        public void handle(KeyEvent keyEvent) {
-            System.out.println(tank.getTranslateX() + ": X");
-            System.out.println(tank.getTranslateY() + ": Y");
-            if(keyEvent.getCode().toString() == "RIGHT"){
-//                tank.setViewport(TANK_RIGHT);
-                tank.setImage(imgFileR);
-                TranslateTransition trTank = new TranslateTransition();
-                trTank.setDuration(Duration.millis(200));
-                trTank.setNode(tank);
-                trTank.setFromX(tank.getTranslateX());
-                trTank.setToX(tank.getTranslateX()+50);
-                trTank.play();
-                TranslateTransition trHead = new TranslateTransition();
-                trHead.setDuration(Duration.millis(200));
-                trHead.setNode(head);
-                trHead.setFromX(head.getTranslateX());
-                trHead.setToX(head.getTranslateX()+50);
-                trHead.play();
-                        }
+        ancPane.getChildren().addAll(tank);
+        Scene scene = new Scene(ancPane, 500, 200, Color.GREEN);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-            if(keyEvent.getCode().toString() == "UP"){
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                System.out.println(tank.getTranslateX() + ": X");
+                System.out.println(tank.getTranslateY() + ": Y");
+                if (keyEvent.getCode().toString() == "RIGHT") {
+//                tank.setViewport(TANK_RIGHT);
+//                    tank.setImage(imgFileR);
+                    if (side != 1) {
+                        int ang;
+                        if (side == 2){ang = 90;}
+                        else if (side == 4) {ang = -90;}
+                        else{ang = 180;}
+                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                        rt.setByAngle(ang);
+                        rt.setAutoReverse(true);
+                        rt.play();
+                        side = 1;
+                    } else {
+                        TranslateTransition trTank = new TranslateTransition();
+                        trTank.setDuration(Duration.millis(500));
+                        trTank.setNode(tank);
+                        trTank.setFromX(tank.getTranslateX());
+                        trTank.setToX(tank.getTranslateX() + 50);
+                        trTank.play();
+                    }
+
+                }
+
+                if (keyEvent.getCode().toString() == "UP") {
 
 //                tank.setViewport(TANK_UP);
-                tank.setImage(imgFile);
-                TranslateTransition trTank = new TranslateTransition();
-                trTank.setDuration(Duration.millis(200));
-                trTank.setNode(tank);
-                trTank.setFromY(tank.getTranslateY());
-                trTank.setToY(tank.getTranslateY()-50);
-                trTank.play();
-                TranslateTransition trHead = new TranslateTransition();
-                trHead.setDuration(Duration.millis(200));
-                trHead.setNode(head);
-                trHead.setFromY(head.getTranslateY());
-                trHead.setToY(head.getTranslateY()-50);
-                trHead.play();
-            }
-            if(keyEvent.getCode().toString() == "DOWN"){
+//                    tank.setImage(imgFileU);
+                    if (side != 2) {
+                        int ang;
+                        if (side == 3){ang = 90;}
+                        else if (side == 1) {ang = -90;}
+                        else{ang = 180;}
+                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                        rt.setByAngle(ang);
+                        rt.setAutoReverse(true);
+                        rt.play();
+                        side = 2;
+                    }else {
+                        TranslateTransition trTank = new TranslateTransition();
+                        trTank.setDuration(Duration.millis(200));
+                        trTank.setNode(tank);
+                        trTank.setFromY(tank.getTranslateY());
+                        trTank.setToY(tank.getTranslateY() - 50);
+                        trTank.play();
+                    }
+                }
+                if (keyEvent.getCode().toString() == "DOWN") {
 //                tank.setViewport(TANK_DOWN);
-                tank.setImage(imgFile);
-                TranslateTransition trTank = new TranslateTransition();
-                trTank.setDuration(Duration.millis(200));
-                trTank.setNode(tank);
-                trTank.setFromY(tank.getTranslateY());
-                trTank.setToY(tank.getTranslateY()+50);
-                trTank.play();
-                TranslateTransition trHead = new TranslateTransition();
-                trHead.setDuration(Duration.millis(200));
-                trHead.setNode(head);
-                trHead.setFromY(head.getTranslateY());
-                trHead.setToY(head.getTranslateY()+50);
-                trHead.play();
-            }
-            if(keyEvent.getCode().toString() == "LEFT"){
+//                    tank.setImage(imgFile);
+                    if (side != 4) {
+                        int ang;
+                        if (side == 1){ang = 90;}
+                        else if (side == 3) {ang = -90;}
+                        else{ang = 180;}
+                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                        rt.setByAngle(ang);
+                        rt.setAutoReverse(true);
+                        rt.play();
+                        side = 4;
+                    } else {
+                        TranslateTransition trTank = new TranslateTransition();
+                        trTank.setDuration(Duration.millis(200));
+                        trTank.setNode(tank);
+                        trTank.setFromY(tank.getTranslateY());
+                        trTank.setToY(tank.getTranslateY() + 50);
+                        trTank.play();
+                    }
+                }
+                if (keyEvent.getCode().toString() == "LEFT") {
 //                tank.setViewport(TANK_LEFT);
-                tank.setImage(imgFileR);
-                TranslateTransition trTank = new TranslateTransition();
-                trTank.setDuration(Duration.millis(200));
-                trTank.setNode(tank);
-                trTank.setFromX(tank.getTranslateX());
-                trTank.setToX(tank.getTranslateX()-50);
-                trTank.play();
-                TranslateTransition trHead = new TranslateTransition();
-                trHead.setDuration(Duration.millis(200));
-                trHead.setNode(head);
-                trHead.setFromX(head.getTranslateX());
-                trHead.setToX(head.getTranslateX()-50);
-                trHead.play();
-            }                
-            if(keyEvent.getCode().toString() == "SPACE"){
-                Rectangle bullet = new Rectangle(5,5,RED);
-                bullet.setX(head.getTranslateX()+20);
-                bullet.setY(head.getTranslateY()+80);
-                TranslateTransition trBullet = new TranslateTransition(Duration.millis(1000),bullet);
-                trBullet.setToY(500);
-                trBullet.play();
-                ancPane.getChildren().add(bullet);
+//                    tank.setImage(imgFileL);
+                    if (side != 3) {
+                        int ang;
+                        if (side == 4){ang = 90;}
+                        else if (side == 2) {ang = -90;}
+                        else{ang = 180;}
+                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                        rt.setByAngle(ang);
+                        rt.setAutoReverse(true);
+                        rt.play();
+                        side = 3;
+                    } else {
+                        TranslateTransition trTank = new TranslateTransition();
+                        trTank.setDuration(Duration.millis(200));
+                        trTank.setNode(tank);
+                        trTank.setFromX(tank.getTranslateX());
+                        trTank.setToX(tank.getTranslateX() - 50);
+                        trTank.play();
+                    }
+                }
+                if (keyEvent.getCode().toString() == "SPACE") {
+                    Rectangle bullet = new Rectangle(5, 5, RED);
+                    bullet.setX(head.getTranslateX() + 20);
+                    bullet.setY(head.getTranslateY() + 80);
+                    TranslateTransition trBullet = new TranslateTransition(Duration.millis(1000), bullet);
+                    trBullet.setToY(500);
+                    trBullet.play();
+                    ancPane.getChildren().add(bullet);
 //                ancPane.getChildren().remove(bullet);            
+                }
             }
-        }
         });
 
-    
-    
-
-}
+    }
 
     /**
      * @param args the command line argument
-     * 
+     *
      */
     public static void main(String[] args) {
         launch(args);
     }
 
-    
-    
 }
