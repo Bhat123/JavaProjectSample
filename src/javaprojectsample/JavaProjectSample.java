@@ -5,7 +5,9 @@
  */
 package javaprojectsample;
 
+import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -34,7 +36,7 @@ import static javafx.scene.paint.Color.RED;
  * @author hiyandao101
  */
 public class JavaProjectSample extends Application {
-    
+
     Image imgFile;
     Image imgHead;
     Image imgFileU;
@@ -45,16 +47,17 @@ public class JavaProjectSample extends Application {
     ImageView head;
     ImageView bullet;
     int side = 4;
-    
+    boolean isMoving = false;
+
     private final Rectangle2D TANK_DOWN = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_UP = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_RIGHT = new Rectangle2D(0, 0, 71, 49);
     private final Rectangle2D TANK_LEFT = new Rectangle2D(0, 0, 71, 49);
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         AnchorPane ancPane = new AnchorPane();
-        
+
         System.out.println("Modified by HFM");
 //     Rectangle rect = new Rectangle (100, 40, 100, 100);
 //     rect.setArcHeight(50);
@@ -91,7 +94,7 @@ public class JavaProjectSample extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            
+
             @Override
             public void handle(KeyEvent keyEvent) {
                 System.out.println(tank.getTranslateX() + ": X");
@@ -101,40 +104,50 @@ public class JavaProjectSample extends Application {
 //                    tank.setImage(imgFileR);
                     if (side != 1) {
                         int ang;
-                        if (side == 2){ang = 90;}
-                        else if (side == 4) {ang = -90;}
-                        else{ang = 180;}
+                        if (side == 2) {
+                            ang = 90;
+                        } else if (side == 4) {
+                            ang = -90;
+                        } else {
+                            ang = 180;
+                        }
                         RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
                         rt.setByAngle(ang);
                         rt.setAutoReverse(true);
                         rt.play();
                         side = 1;
                     } else {
-                            TranslateTransition trTank = new TranslateTransition();
+                        TranslateTransition trTank = new TranslateTransition();
                         trTank.setDuration(Duration.millis(500));
-                            trTank.setNode(tank);
-                            trTank.setFromX(tank.getTranslateX());
-                            trTank.setToX(tank.getTranslateX() + 50);
-                            trTank.play();
-                                }
-                    
+                        trTank.setNode(tank);
+                        trTank.setFromX(tank.getTranslateX());
+                        trTank.setToX(tank.getTranslateX() + 50);
+                        trTank.setAutoReverse(true);
+//                        trTank.setCycleCount(Timeline.INDEFINITE);
+                        trTank.play();
+                    }
+
                 }
-                
+
                 if (keyEvent.getCode().toString() == "UP") {
 
 //                tank.setViewport(TANK_UP);
 //                    tank.setImage(imgFileU);
                     if (side != 2) {
                         int ang;
-                        if (side == 3){ang = 90;}
-                        else if (side == 1) {ang = -90;}
-                        else{ang = 180;}
+                        if (side == 3) {
+                            ang = 90;
+                        } else if (side == 1) {
+                            ang = -90;
+                        } else {
+                            ang = 180;
+                        }
                         RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
                         rt.setByAngle(ang);
                         rt.setAutoReverse(true);
                         rt.play();
                         side = 2;
-                    }else {
+                    } else {
                         TranslateTransition trTank = new TranslateTransition();
                         trTank.setDuration(Duration.millis(500));
                         trTank.setNode(tank);
@@ -148,9 +161,13 @@ public class JavaProjectSample extends Application {
 //                    tank.setImage(imgFile);
                     if (side != 4) {
                         int ang;
-                        if (side == 1){ang = 90;}
-                        else if (side == 3) {ang = -90;}
-                        else{ang = 180;}
+                        if (side == 1) {
+                            ang = 90;
+                        } else if (side == 3) {
+                            ang = -90;
+                        } else {
+                            ang = 180;
+                        }
                         RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
                         rt.setByAngle(ang);
                         rt.setAutoReverse(true);
@@ -192,9 +209,9 @@ public class JavaProjectSample extends Application {
                     }
                 }
                 if (keyEvent.getCode().toString() == "SPACE") {
-                    
+
                     if (keyEvent.getCode().toString() == "SPACE") {
-                        
+
                         bullet.setFitHeight(20);
                         bullet.setFitWidth(20);
                         if (side == 1) {
@@ -246,7 +263,7 @@ public class JavaProjectSample extends Application {
                 }
             }
         });
-        
+
     }
 
     /**
@@ -256,5 +273,5 @@ public class JavaProjectSample extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
