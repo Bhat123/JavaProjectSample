@@ -48,7 +48,8 @@ public class JavaProjectSample extends Application {
     ImageView bullet;
     int side = 4;
     boolean isMoving = false;
-
+    boolean isRotating = false;
+    
     private final Rectangle2D TANK_DOWN = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_UP = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_RIGHT = new Rectangle2D(0, 0, 71, 49);
@@ -111,20 +112,37 @@ public class JavaProjectSample extends Application {
                         } else {
                             ang = 180;
                         }
-                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
-                        rt.setByAngle(ang);
-                        rt.setAutoReverse(true);
-                        rt.play();
-                        side = 1;
+                        if(isRotating == false){
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            rt.setByAngle(ang);
+                            rt.setAutoReverse(true);
+                            isRotating = true;
+                            rt.setOnFinished(e -> isRotating = false);
+                            rt.play();
+                            side = 1;
+                        }
                     } else {
-                        TranslateTransition trTank = new TranslateTransition();
-                        trTank.setDuration(Duration.millis(500));
-                        trTank.setNode(tank);
-                        trTank.setFromX(tank.getTranslateX());
-                        trTank.setToX(tank.getTranslateX() + 50);
-                        trTank.setAutoReverse(true);
-//                        trTank.setCycleCount(Timeline.INDEFINITE);
-                        trTank.play();
+                        if(isMoving == false){
+                            TranslateTransition trTank = new TranslateTransition();
+                            trTank.setDuration(Duration.millis(500));
+                            trTank.setNode(tank);
+                            trTank.setFromX(tank.getTranslateX());
+                            trTank.setToX(tank.getTranslateX() + 50);
+                            trTank.setAutoReverse(true);
+                            isMoving = true;
+                            System.out.println("1111 about to move");
+                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    isMoving = false;
+                                }
+                            });
+                            trTank.play();
+                        }
+                        else{
+                            System.out.println("it's moving");
+                        }
+                        
                     }
 
                 }
@@ -142,18 +160,34 @@ public class JavaProjectSample extends Application {
                         } else {
                             ang = 180;
                         }
-                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
-                        rt.setByAngle(ang);
-                        rt.setAutoReverse(true);
-                        rt.play();
-                        side = 2;
+                        if(isRotating == false){
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            rt.setByAngle(ang);
+                            rt.setAutoReverse(true);
+                            isRotating = true;
+                            rt.setOnFinished(e -> isRotating = false);
+                            rt.play();
+                            side = 2;
+                        }
                     } else {
-                        TranslateTransition trTank = new TranslateTransition();
-                        trTank.setDuration(Duration.millis(500));
-                        trTank.setNode(tank);
-                        trTank.setFromY(tank.getTranslateY());
-                        trTank.setToY(tank.getTranslateY() - 50);
-                        trTank.play();
+                        
+                        if(isMoving == false){
+                            TranslateTransition trTank = new TranslateTransition();
+                            trTank.setDuration(Duration.millis(500));
+                            trTank.setNode(tank);
+                            trTank.setFromY(tank.getTranslateY());
+                            trTank.setToY(tank.getTranslateY() - 50);
+                            trTank.setAutoReverse(true);
+                            isMoving = true;
+                            System.out.println("1111 about to move");
+                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    isMoving = false;
+                                }
+                            });
+                            trTank.play();
+                        }
                     }
                 }
                 if (keyEvent.getCode().toString() == "DOWN") {
@@ -168,18 +202,37 @@ public class JavaProjectSample extends Application {
                         } else {
                             ang = 180;
                         }
-                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
-                        rt.setByAngle(ang);
-                        rt.setAutoReverse(true);
-                        rt.play();
-                        side = 4;
+                        if(isRotating == false){
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            rt.setByAngle(ang);
+                            rt.setAutoReverse(true);
+                            isRotating = true;
+                            rt.setOnFinished(e -> isRotating = false);
+                            rt.play();
+                            side = 4;
+                        }
+                        else{
+                            System.out.println("is Rotating");
+                        }
                     } else {
-                        TranslateTransition trTank = new TranslateTransition();
-                        trTank.setDuration(Duration.millis(500));
-                        trTank.setNode(tank);
-                        trTank.setFromY(tank.getTranslateY());
-                        trTank.setToY(tank.getTranslateY() + 50);
-                        trTank.play();
+                        
+                        if(isMoving == false){
+                            TranslateTransition trTank = new TranslateTransition();
+                            trTank.setDuration(Duration.millis(500));
+                            trTank.setNode(tank);
+                            trTank.setFromY(tank.getTranslateY());
+                            trTank.setToY(tank.getTranslateY() + 50);
+                            trTank.setAutoReverse(true);
+                            isMoving = true;
+                            System.out.println("1111 about to move");
+                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    isMoving = false;
+                                }
+                            });
+                            trTank.play();
+                        }
                     }
                 }
                 if (keyEvent.getCode().toString() == "LEFT") {
@@ -194,18 +247,36 @@ public class JavaProjectSample extends Application {
                         } else {
                             ang = 180;
                         }
-                        RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
-                        rt.setByAngle(ang);
-                        rt.setAutoReverse(true);
-                        rt.play();
-                        side = 3;
+                        if(isRotating == false){
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            rt.setByAngle(ang);
+                            rt.setAutoReverse(true);
+                            isRotating = true;
+                            rt.setOnFinished(e -> isRotating = false);
+                            rt.play();
+                            side = 3;
+                        }
+                        else{
+                            System.out.println("is Rotating");
+                        }
                     } else {
-                        TranslateTransition trTank = new TranslateTransition();
-                        trTank.setDuration(Duration.millis(500));
-                        trTank.setNode(tank);
-                        trTank.setFromX(tank.getTranslateX());
-                        trTank.setToX(tank.getTranslateX() - 50);
-                        trTank.play();
+                        if(isMoving == false){
+                            TranslateTransition trTank = new TranslateTransition();
+                            trTank.setDuration(Duration.millis(500));
+                            trTank.setNode(tank);
+                            trTank.setFromX(tank.getTranslateX());
+                            trTank.setToX(tank.getTranslateX() - 50);
+                            trTank.setAutoReverse(true);
+                            isMoving = true;
+                            System.out.println("1111 about to move");
+                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    isMoving = false;
+                                }
+                            });
+                            trTank.play();
+                        }
                     }
                 }
                 if (keyEvent.getCode().toString() == "SPACE") {
