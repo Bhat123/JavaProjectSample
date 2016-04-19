@@ -43,10 +43,41 @@ public class JavaProjectSample extends Application {
     Image imgFileR;
     Image imgFileL;
     Image imgBullet;
+    Image imgWall;
+    Image imgGround;
+    Image imgStar;
+    ImageView star;
     ImageView tank;
     ImageView head;
     ImageView bullet;
-    int side = 4;
+    ImageView wall;
+    ImageView ground;
+    
+    
+    
+    double posX = 2;
+    double posY = 2;
+    int side = 1;
+    int map[][]={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                 {1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                 {1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                 {1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
+                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    };
     boolean isMoving = false;
     boolean isRotating = false;
     
@@ -58,7 +89,8 @@ public class JavaProjectSample extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         AnchorPane ancPane = new AnchorPane();
-
+        primaryStage.setFullScreen(true);
+        
         System.out.println("Modified by HFM");
 //     Rectangle rect = new Rectangle (100, 40, 100, 100);
 //     rect.setArcHeight(50);
@@ -78,7 +110,17 @@ public class JavaProjectSample extends Application {
         imgFileU = new Image("file:final_up.png");
         imgFileR = new Image("file:final_right.png");
         imgFileL = new Image("file:final_left.png");
+        imgWall = new Image("file:wall.jpg");
+        imgGround = new Image("file:ground.jpg");
+        imgStar = new Image("file:star2.png");
+        
+        star = new ImageView(imgStar);
+        star.setFitHeight(70);
+        star.setFitWidth(70);
+        star.setX(47);
+        star.setY(327);
         head = new ImageView(imgHead);
+        ground = new ImageView(imgGround);
         imgBullet = new Image("file:bullet.png");
         bullet = new ImageView(imgBullet);
 //    head.setFitHeight(30);
@@ -86,21 +128,52 @@ public class JavaProjectSample extends Application {
         head.setLayoutX(6);
         head.setLayoutY(1);
 //    head.getTransforms().add(new Rotate(45, 17, 24));
-        tank = new ImageView(imgFile);
+        tank = new ImageView(imgFileR);
+        tank.setX(60);
+        tank.setY(230);
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
 //    tank.setFitWidth(50);
-        ancPane.getChildren().addAll(tank);
-        Scene scene = new Scene(ancPane, 500, 200, Color.GREEN);
+        for(int i = 0;i<19;i++){
+            for(int j = 0; j<34;j++){
+                if(map[i][j] == 1){
+                wall = new ImageView(imgWall);
+                wall.setFitHeight(40);
+                wall.setFitWidth(40);
+                wall.setX(posX);
+                wall.setY(posY);
+                ancPane.getChildren().add(wall);
+                }
+                if(map[i][j] == 0){
+                ground = new ImageView(imgGround);
+                ground.setFitHeight(40);
+                ground.setFitWidth(40);
+                ground.setX(posX);
+                ground.setY(posY);
+                ancPane.getChildren().add(ground);
+                }
+                
+                posX+=40;
+                }
+            posX = 2;
+            posY+=40;
+        }
+        ancPane.getChildren().addAll(tank,star);
+        Scene scene = new Scene(ancPane, 500, 200, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        
+        
+        
+        
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(KeyEvent keyEvent) {
                 System.out.println(tank.getTranslateX() + ": X");
                 System.out.println(tank.getTranslateY() + ": Y");
-                if (keyEvent.getCode().toString() == "RIGHT") {
+                if (keyEvent.getCode().toString() == "D") {
 //                tank.setViewport(TANK_RIGHT);
 //                    tank.setImage(imgFileR);
                     if (side != 1) {
@@ -124,10 +197,10 @@ public class JavaProjectSample extends Application {
                     } else {
                         if(isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(500));
+                            trTank.setDuration(Duration.millis(1));
                             trTank.setNode(tank);
                             trTank.setFromX(tank.getTranslateX());
-                            trTank.setToX(tank.getTranslateX() + 50);
+                            trTank.setToX(tank.getTranslateX() + 5);
                             trTank.setAutoReverse(true);
                             isMoving = true;
                             System.out.println("1111 about to move");
@@ -147,7 +220,7 @@ public class JavaProjectSample extends Application {
 
                 }
 
-                if (keyEvent.getCode().toString() == "UP") {
+                if (keyEvent.getCode().toString() == "W") {
 
 //                tank.setViewport(TANK_UP);
 //                    tank.setImage(imgFileU);
@@ -173,10 +246,10 @@ public class JavaProjectSample extends Application {
                         
                         if(isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(500));
+                            trTank.setDuration(Duration.millis(1));
                             trTank.setNode(tank);
                             trTank.setFromY(tank.getTranslateY());
-                            trTank.setToY(tank.getTranslateY() - 50);
+                            trTank.setToY(tank.getTranslateY() - 5);
                             trTank.setAutoReverse(true);
                             isMoving = true;
                             System.out.println("1111 about to move");
@@ -190,7 +263,7 @@ public class JavaProjectSample extends Application {
                         }
                     }
                 }
-                if (keyEvent.getCode().toString() == "DOWN") {
+                if (keyEvent.getCode().toString() == "S") {
 //                tank.setViewport(TANK_DOWN);
 //                    tank.setImage(imgFile);
                     if (side != 4) {
@@ -218,10 +291,10 @@ public class JavaProjectSample extends Application {
                         
                         if(isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(500));
+                            trTank.setDuration(Duration.millis(1));
                             trTank.setNode(tank);
                             trTank.setFromY(tank.getTranslateY());
-                            trTank.setToY(tank.getTranslateY() + 50);
+                            trTank.setToY(tank.getTranslateY() + 5);
                             trTank.setAutoReverse(true);
                             isMoving = true;
                             System.out.println("1111 about to move");
@@ -235,7 +308,7 @@ public class JavaProjectSample extends Application {
                         }
                     }
                 }
-                if (keyEvent.getCode().toString() == "LEFT") {
+                if (keyEvent.getCode().toString() == "A") {
 //                tank.setViewport(TANK_LEFT);
 //                    tank.setImage(imgFileL);
                     if (side != 3) {
@@ -262,10 +335,10 @@ public class JavaProjectSample extends Application {
                     } else {
                         if(isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(500));
+                            trTank.setDuration(Duration.millis(1));
                             trTank.setNode(tank);
                             trTank.setFromX(tank.getTranslateX());
-                            trTank.setToX(tank.getTranslateX() - 50);
+                            trTank.setToX(tank.getTranslateX() - 5);
                             trTank.setAutoReverse(true);
                             isMoving = true;
                             System.out.println("1111 about to move");
@@ -283,57 +356,70 @@ public class JavaProjectSample extends Application {
 
                     if (keyEvent.getCode().toString() == "SPACE") {
 
-                        bullet.setFitHeight(20);
-                        bullet.setFitWidth(20);
+                        
                         if (side == 1) {
+                            bullet = new ImageView(imgBullet);
+                            bullet.setFitHeight(20);
+                            bullet.setFitWidth(20);
                             TranslateTransition trBullet = new TranslateTransition();
                             trBullet.setDuration(Duration.millis(1000));
                             trBullet.setNode(bullet);
-                            trBullet.setFromX(tank.getTranslateX() + 64);
-                            trBullet.setFromY(tank.getTranslateY() + 34);
+                            trBullet.setFromX(tank.getTranslateX() + 142);
+                            trBullet.setFromY(tank.getTranslateY() + 245);
                             trBullet.setToX(tank.getTranslateX() + 2000);
-                            trBullet.setToY(tank.getTranslateY() + 34);
+                            trBullet.setToY(tank.getTranslateY() + 245);
                             trBullet.play();
                             ancPane.getChildren().add(bullet);
                             System.out.println("askdjbagsd");
                         } else if (side == 2) {
+                            bullet = new ImageView(imgBullet);
+                            bullet.setFitHeight(20);
+                            bullet.setFitWidth(20);
                             TranslateTransition trBullet = new TranslateTransition();
                             trBullet.setDuration(Duration.millis(1000));
                             trBullet.setNode(bullet);
-                            trBullet.setFromX(tank.getTranslateX() + 14);
-                            trBullet.setFromY(tank.getTranslateY() - 18);
-                            trBullet.setToX(tank.getTranslateX() + 14);
+                            trBullet.setFromX(tank.getTranslateX() + 96);
+                            trBullet.setFromY(tank.getTranslateY() + 197);
+                            trBullet.setToX(tank.getTranslateX() + 96);
                             trBullet.setToY(tank.getTranslateY() - 2000);
                             trBullet.play();
                             ancPane.getChildren().add(bullet);
                             System.out.println("askdjbagsd");
                         } else if (side == 3) {
+                            bullet = new ImageView(imgBullet);
+                            bullet.setFitHeight(20);
+                            bullet.setFitWidth(20);
                             TranslateTransition trBullet = new TranslateTransition();
                             trBullet.setDuration(Duration.millis(1000));
                             trBullet.setNode(bullet);
-                            trBullet.setFromX(tank.getTranslateX() - 36);
-                            trBullet.setFromY(tank.getTranslateY() + 33);
-                            trBullet.setToY(tank.getTranslateY() + 33);
+                            trBullet.setFromX(tank.getTranslateX() + 47);
+                            trBullet.setFromY(tank.getTranslateY() + 244);
+                            trBullet.setToY(tank.getTranslateY() + 245);
                             trBullet.setToX(tank.getTranslateX() - 2000);
                             trBullet.play();
                             ancPane.getChildren().add(bullet);
                             System.out.println("askdjbagsd");
                         } else if (side == 4) {
+                            bullet = new ImageView(imgBullet);
+                            bullet.setFitHeight(20);
+                            bullet.setFitWidth(20);
                             TranslateTransition trBullet = new TranslateTransition();
                             trBullet.setDuration(Duration.millis(1000));
                             trBullet.setNode(bullet);
-                            trBullet.setFromX(tank.getTranslateX() + 13);
-                            trBullet.setFromY(tank.getTranslateY() + 85);
-                            trBullet.setToX(tank.getTranslateX());
+                            trBullet.setFromX(tank.getTranslateX() + 94);
+                            trBullet.setFromY(tank.getTranslateY() + 293);
+                            trBullet.setToX(tank.getTranslateX() + 94);
                             trBullet.setToY(tank.getTranslateY() + 2000);
                             trBullet.play();
                             ancPane.getChildren().add(bullet);
                             System.out.println("askdjbagsd");
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        
+        
 
     }
 
