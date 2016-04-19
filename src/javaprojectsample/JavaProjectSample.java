@@ -197,10 +197,10 @@ public class JavaProjectSample extends Application {
                     } else {
                         if(isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(1));
+                            trTank.setDuration(Duration.millis(300));
                             trTank.setNode(tank);
                             trTank.setFromX(tank.getTranslateX());
-                            trTank.setToX(tank.getTranslateX() + 5);
+                            trTank.setToX(tank.getTranslateX() + 40);
                             trTank.setAutoReverse(true);
                             isMoving = true;
                             System.out.println("1111 about to move");
