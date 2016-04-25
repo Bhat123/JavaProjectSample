@@ -8,6 +8,7 @@ package javaprojectsample;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,9 +22,7 @@ import javafx.util.Duration;
 public class Move extends Thread{
 
     public String key;
-    public ImageView tank;
-    public Move(ImageView tank, String key){
-        this.tank = tank;
+    public Move(String key){
         this.key = key;
     }
     @Override
@@ -41,7 +40,7 @@ public class Move extends Thread{
                             ang = 180;
                         }
                         if(JavaProjectSample.isRotating == false){
-                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), JavaProjectSample.tank);
                             rt.setByAngle(ang);
                             rt.setAutoReverse(true);
                             JavaProjectSample.isRotating = true;
@@ -53,10 +52,9 @@ public class Move extends Thread{
                         if(JavaProjectSample.isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
                             trTank.setDuration(Duration.millis(300));
-                            trTank.setNode(tank);
-                            trTank.setFromX(tank.getTranslateX());
-                            trTank.setToX(tank.getTranslateX() + 40);
-                            trTank.setAutoReverse(true);
+                            trTank.setNode(JavaProjectSample.tank);
+                            trTank.setFromX(JavaProjectSample.tank.getTranslateX());
+                            trTank.setToX(JavaProjectSample.tank.getTranslateX() + 40);
                             JavaProjectSample.isMoving = true;
                             System.out.println("1111 about to move");
                             trTank.setOnFinished(new EventHandler<ActionEvent>() {
@@ -66,6 +64,7 @@ public class Move extends Thread{
                                 }
                             });
                             trTank.play();
+                            JavaProjectSample.checkCollision(JavaProjectSample.ancPane, JavaProjectSample.wall, JavaProjectSample.tank);
                         }
                         else{
                             System.out.println("it's moving");
@@ -89,7 +88,7 @@ public class Move extends Thread{
                             ang = 180;
                         }
                         if(JavaProjectSample.isRotating == false){
-                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), JavaProjectSample.tank);
                             rt.setByAngle(ang);
                             rt.setAutoReverse(true);
                             JavaProjectSample.isRotating = true;
@@ -102,9 +101,9 @@ public class Move extends Thread{
                         if(JavaProjectSample.isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
                             trTank.setDuration(Duration.millis(1));
-                            trTank.setNode(tank);
-                            trTank.setFromY(tank.getTranslateY());
-                            trTank.setToY(tank.getTranslateY() - 5);
+                            trTank.setNode(JavaProjectSample.tank);
+                            trTank.setFromY(JavaProjectSample.tank.getTranslateY());
+                            trTank.setToY(JavaProjectSample.tank.getTranslateY() - 5);
                             trTank.setAutoReverse(true);
                             JavaProjectSample.isMoving = true;
                             System.out.println("1111 about to move");
@@ -131,7 +130,7 @@ public class Move extends Thread{
                             ang = 180;
                         }
                         if(JavaProjectSample.isRotating == false){
-                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), JavaProjectSample.tank);
                             rt.setByAngle(ang);
                             rt.setAutoReverse(true);
                             JavaProjectSample.isRotating = true;
@@ -147,9 +146,9 @@ public class Move extends Thread{
                         if(JavaProjectSample.isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
                             trTank.setDuration(Duration.millis(1));
-                            trTank.setNode(tank);
-                            trTank.setFromY(tank.getTranslateY());
-                            trTank.setToY(tank.getTranslateY() + 5);
+                            trTank.setNode(JavaProjectSample.tank);
+                            trTank.setFromY(JavaProjectSample.tank.getTranslateY());
+                            trTank.setToY(JavaProjectSample.tank.getTranslateY() + 5);
                             trTank.setAutoReverse(true);
                             JavaProjectSample.isMoving = true;
                             System.out.println("1111 about to move");
@@ -176,7 +175,7 @@ public class Move extends Thread{
                             ang = 180;
                         }
                         if(JavaProjectSample.isRotating == false){
-                            RotateTransition rt = new RotateTransition(Duration.millis(500), tank);
+                            RotateTransition rt = new RotateTransition(Duration.millis(500), JavaProjectSample.tank);
                             rt.setByAngle(ang);
                             rt.setAutoReverse(true);
                             JavaProjectSample.isRotating = true;
@@ -191,9 +190,9 @@ public class Move extends Thread{
                         if(JavaProjectSample.isMoving == false){
                             TranslateTransition trTank = new TranslateTransition();
                             trTank.setDuration(Duration.millis(1));
-                            trTank.setNode(tank);
-                            trTank.setFromX(tank.getTranslateX());
-                            trTank.setToX(tank.getTranslateX() - 5);
+                            trTank.setNode(JavaProjectSample.tank);
+                            trTank.setFromX(JavaProjectSample.tank.getTranslateX());
+                            trTank.setToX(JavaProjectSample.tank.getTranslateX() - 5);
                             trTank.setAutoReverse(true);
                             JavaProjectSample.isMoving = true;
                             System.out.println("1111 about to move");

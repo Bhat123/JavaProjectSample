@@ -13,8 +13,11 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,12 +52,12 @@ public class JavaProjectSample extends Application {
     Image imgGround;
     Image imgStar;
     ImageView star;
-    ImageView tank;
+    static ImageView tank;
     ImageView head;
     ImageView bullet;
-    ImageView wall;
+    static ImageView wall;
     ImageView ground;
-    
+    static AnchorPane ancPane;
     
     
     double posX = 2;
@@ -90,7 +93,7 @@ public class JavaProjectSample extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        AnchorPane ancPane = new AnchorPane();
+        ancPane = new AnchorPane();
         primaryStage.setFullScreen(true);
         
         System.out.println("Modified by HFM");
@@ -176,52 +179,52 @@ public class JavaProjectSample extends Application {
                 System.out.println(tank.getTranslateX() + ": X");
                 System.out.println(tank.getTranslateY() + ": Y");
                 if (keyEvent.getCode().toString() == "D") {
-                    Move mv = new Move(tank, "D");
+                    Move mv = new Move("D");
                     mv.start();
-                    try {
-                        mv.join();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    try {
+//                        mv.join();
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 }
 //
                 if (keyEvent.getCode().toString() == "W") {
-                  Move mv = new Move(tank, "W");
+                  Move mv = new Move("W");
                   mv.start();
-                    try {
-                        mv.join();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    try {
+//                        mv.join();
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 }
                 if (keyEvent.getCode().toString() == "S") {
-                    Move mv = new Move(tank, "S");
+                    Move mv = new Move("S");
                     mv.start();
-                    try {
-                        mv.join();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    try {
+//                        mv.join();
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 }
                 if (keyEvent.getCode().toString() == "A") {
-                    Move mv = new Move(tank, "A");
+                    Move mv = new Move("A");
                     mv.start();
-                    try {
-                        mv.join();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    try {
+//                        mv.join();
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 }
                
 
                     if (keyEvent.getCode().toString() == "SPACE") {
                         FireBullet fb = new FireBullet(ancPane, tank);
                         fb.start();
-                    try {
-                        fb.join();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    try {
+//                        fb.join();
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                         System.out.println("main");
                         }
                     }
@@ -236,6 +239,20 @@ public class JavaProjectSample extends Application {
      * @param args the command line argument
      *
      */
+    static void checkCollision(AnchorPane pane, ImageView rect1, ImageView rect2) {
+
+        rect2.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
+            @Override
+            public void changed(ObservableValue<? extends Bounds> arg0, Bounds oldValue, Bounds newValue) {
+                if (rect1.intersects(newValue)) {
+                    System.out.println("Collide ============= Collide");
+                }
+                else{
+                    System.out.println("NOT collide");
+                }
+            }
+        });
+    }
     public static void main(String[] args) {
         launch(args);
     }
