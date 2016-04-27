@@ -34,6 +34,7 @@ public class Enemy extends Thread {
                 enemy.rotate(3);
                 Thread.sleep(1000);
             }
+             
             else if (JavaProjectSample.tank.getY() + JavaProjectSample.tank.getY() - enemy.y - enemy.eTank.getTranslateY() > 20){
                 enemy.rotate(4);
                 System.out.println("2st case");
