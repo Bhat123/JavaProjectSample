@@ -141,10 +141,10 @@ public class Move extends Thread{
                         }
                     }
                 }
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Move.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            Thread.sleep(10);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(Move.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }

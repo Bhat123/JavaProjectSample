@@ -161,6 +161,8 @@ public class JavaProjectSample extends Application {
         Scene scene = new Scene(ancPane, 500, 200, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
+        Enemy thread1 = new Enemy();
+        thread1.start();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
@@ -170,6 +172,7 @@ public class JavaProjectSample extends Application {
                 if (keyEvent.getCode().toString() == "D") {
                     Move mv = new Move("D");
                     mv.start();
+                    
 //                    try {
 //                        mv.join();
 //                    } catch (InterruptedException ex) {
@@ -210,22 +213,22 @@ public class JavaProjectSample extends Application {
             }
         });
 
-        final Task task = new Task() {
-
-            @Override
-            protected Object call() throws Exception {
-                System.out.println("Music version ");
-                String musicFile = "back_music.mp3";
-                Media sound = new Media(new File(musicFile).toURI().toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.setCycleCount(AudioClip.INDEFINITE);
-                mediaPlayer.play();
-                return null;
-            }
-        };
-        Thread thread1 = new Thread(task);
-        thread1.start();
-
+//        final Task task = new Task() {
+//
+//            @Override
+//            protected Object call() throws Exception {
+//                System.out.println("Music version ");
+//                String musicFile = "back_music.mp3";
+//                Media sound = new Media(new File(musicFile).toURI().toString());
+//                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//                mediaPlayer.setCycleCount(AudioClip.INDEFINITE);
+//                mediaPlayer.play();
+//                return null;
+//            }
+//        };
+//        Thread thread1 = new Thread(task);
+//        thread1.start();
+        
     }
 
     /**

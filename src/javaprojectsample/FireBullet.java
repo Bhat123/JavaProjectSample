@@ -70,13 +70,13 @@ class FireBullet extends Thread {
                 }
             });
             }
-            try {
-                Thread.sleep(1000);
-            } catch (Exception ex) {
-                Logger.getLogger(FireBullet.class
-                        .getName()).log(Level.SEVERE, null, ex);
-                System.out.println(ex);
-            }
+//            try {
+//                Thread.sleep(10);
+//            } catch (Exception ex) {
+//                Logger.getLogger(FireBullet.class
+//                        .getName()).log(Level.SEVERE, null, ex);
+//                System.out.println(ex);
+//            }
         }
     }
 }
