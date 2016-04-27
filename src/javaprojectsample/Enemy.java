@@ -24,25 +24,35 @@ public class Enemy extends Thread {
         Tank enemy = new Tank(x, y);
         while (true) {
             try {
-            if (enemy.y + enemy.eTank.getTranslateY() - JavaProjectSample.tank.getY() - JavaProjectSample.tank.getY() > 20 ) {
+            if (enemy.y + enemy.eTank.getTranslateY() - JavaProjectSample.tank.getY() - JavaProjectSample.tank.getTranslateY() > 20 ) {
                 enemy.rotate(2);
                 System.out.println("1st case");
                 while (enemy.y + enemy.eTank.getTranslateY() - JavaProjectSample.tank.getY() - JavaProjectSample.tank.getTranslateY() > 3) {
                     enemy.move(1, 5);
                     Thread.sleep(100);
                 }
-                enemy.rotate(3);
+                if( enemy.x + enemy.eTank.getTranslateX() > JavaProjectSample.tank.getX() + JavaProjectSample.tank.getTranslateX()){
+                    enemy.rotate(3);
+                }
+                else{
+                    enemy.rotate(1);
+                }
                 Thread.sleep(1000);
             }
              
-            else if (JavaProjectSample.tank.getY() + JavaProjectSample.tank.getY() - enemy.y - enemy.eTank.getTranslateY() > 20){
+            else if (JavaProjectSample.tank.getY() + JavaProjectSample.tank.getTranslateY() - enemy.y - enemy.eTank.getTranslateY() > 20){
                 enemy.rotate(4);
                 System.out.println("2st case");
                 while (JavaProjectSample.tank.getY() + JavaProjectSample.tank.getTranslateY() - enemy.y - enemy.eTank.getTranslateY() > 3) {
                     enemy.move(1, 5);
                     Thread.sleep(100);
                 }
-                enemy.rotate(3);
+                if( enemy.x + enemy.eTank.getTranslateX() > JavaProjectSample.tank.getX() + JavaProjectSample.tank.getTranslateX()){
+                    enemy.rotate(3);
+                }
+                else{
+                    enemy.rotate(1);
+                }
                 Thread.sleep(1000);
             }
             else{
@@ -50,7 +60,15 @@ public class Enemy extends Thread {
                 enemy.fire();
                 Thread.sleep(1000);
             }
-                Thread.sleep(10);
+            while(true){
+                if(Math.abs(JavaProjectSample.tank.getY() + JavaProjectSample.tank.getTranslateY() - enemy.y - enemy.eTank.getTranslateY()) > 70){
+                    System.out.println("worked");
+                    break;
+                }
+                enemy.move(1, 5);
+                enemy.fire();
+                Thread.sleep(100);
+            }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Enemy.class.getName()).log(Level.SEVERE, null, ex);
             }
