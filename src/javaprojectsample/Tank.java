@@ -81,9 +81,13 @@ public class Tank {
         enBullet.setToX(this.eTank.getX() + toX);
         enBullet.setToY(this.eTank.getY() + toY);
         enBullet.play();
-        JavaProjectSample.ancPane.getChildren().add(this.eBullet);
-    }
-
+        Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        JavaProjectSample.ancPane.getChildren().add(eBullet);
+                    }
+    });
+                }
     public void move(int time, int speed) {
         System.out.println("Moving");
         int ySpeed = 0;

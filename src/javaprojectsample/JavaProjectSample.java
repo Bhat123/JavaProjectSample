@@ -184,8 +184,10 @@ public class JavaProjectSample extends Application {
         Scene scene = new Scene(ancPane, 500, 200, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
-//        Enemy thread1 = new Enemy();
-//        thread1.start();
+        Enemy thread1 = new Enemy(500, 600);
+        thread1.start();
+//        Enemy thread2 = new Enemy(500, 300);
+//        thread2.start();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
