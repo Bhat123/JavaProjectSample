@@ -103,19 +103,7 @@ public class JavaProjectSample extends Application {
         primaryStage.setFullScreen(true);
 
         System.out.println("Modified by HFM");
-//     Rectangle rect = new Rectangle (100, 40, 100, 100);
-//     rect.setArcHeight(50);
-//     rect.setArcWidth(50);
-//     rect.setFill(Color.VIOLET);
-//     
-//     rect.setX(100);
-//        
-//     RotateTransition rt = new RotateTransition(Duration.millis(300), head);
-//     rt.setByAngle(180);
-//     rt.setCycleCount(4);
-//     rt.setAutoReverse(true);
-
-//     rt.play();
+        
         imgHead = new Image("file:green_head.png");
         imgFile = new Image("file:final_body.png");
         imgFileU = new Image("file:final_up.png");
@@ -226,10 +214,8 @@ public class JavaProjectSample extends Application {
 
             @Override
             protected Object call() throws Exception {
-//                int s = INDEFINITE;
                 System.out.println("Music version ");
-                String musicFile = "back_music.mp3";     // For example
-
+                String musicFile = "back_music.mp3";
                 Media sound = new Media(new File(musicFile).toURI().toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(sound);
                 mediaPlayer.setCycleCount(AudioClip.INDEFINITE);
@@ -321,7 +307,6 @@ public class JavaProjectSample extends Application {
             toX = 94;
             toY = +2000;
         }
-//        iv = new ImageView(img);
         iv.setFitHeight(20);
         iv.setFitWidth(20);
         TranslateTransition trBullet = new TranslateTransition();

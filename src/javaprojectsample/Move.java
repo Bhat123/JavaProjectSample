@@ -28,8 +28,6 @@ public class Move extends Thread{
     @Override
     public void run(){
         if (key == "D") {
-//                tank.setViewport(TANK_RIGHT);
-//                    tank.setImage(imgFileR);
                     if (JavaProjectSample.side != 1) {
                         int ang;
                         if (JavaProjectSample.side == 2) {
@@ -61,9 +59,6 @@ public class Move extends Thread{
                 }
 
                 if (key == "W") {
-
-//                tank.setViewport(TANK_UP);
-//                    tank.setImage(imgFileU);
                     if (JavaProjectSample.side != 2) {
                         int ang;
                         if (JavaProjectSample.side == 3) {
@@ -90,8 +85,6 @@ public class Move extends Thread{
                     }
                 }
                 if (key == "S") {
-//                tank.setViewport(TANK_DOWN);
-//                    tank.setImage(imgFile);
                     if (JavaProjectSample.side != 4) {
                         int ang;
                         if (JavaProjectSample.side == 1) {
@@ -121,8 +114,6 @@ public class Move extends Thread{
                     }
                 }
                 if (key == "A") {
-//                tank.setViewport(TANK_LEFT);
-//                    tank.setImage(imgFileL);
                     if (JavaProjectSample.side != 3) {
                         int ang;
                         if (JavaProjectSample.side == 4) {

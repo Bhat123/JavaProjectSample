@@ -24,8 +24,6 @@ class FireBullet extends Thread {
 
     Image imgBullet = new Image("file:bullet.png");
     ImageView bullet = new ImageView(imgBullet);
-//    ImageView tank;
-//    AnchorPane ancPane;
     KeyEvent keyEvent;
 
     public FireBullet(KeyEvent keyEvent) {
@@ -34,7 +32,6 @@ class FireBullet extends Thread {
 
     @Override
     public void run() {
-        System.out.println("Works");
         if (keyEvent.getCode().toString() == "SPACE") {
             if (JavaProjectSample.side == 1) {
                 bullet = new ImageView(imgBullet);
@@ -54,7 +51,6 @@ class FireBullet extends Thread {
                         JavaProjectSample.ancPane.getChildren().add(bullet);
                     }
                 });
-                System.out.println("askdjbagsd");
             } else if (JavaProjectSample.side == 3) {
                 bullet = new ImageView(imgBullet);
                 JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
@@ -64,7 +60,6 @@ class FireBullet extends Thread {
                         JavaProjectSample.ancPane.getChildren().add(bullet);
                     }
                 });
-                System.out.println("askdjbagsd");
             } else if (JavaProjectSample.side == 4) {
                 bullet = new ImageView(imgBullet);
                 JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
@@ -74,10 +69,7 @@ class FireBullet extends Thread {
                     JavaProjectSample.ancPane.getChildren().add(bullet);
                 }
             });
-//                JavaProjectSample.ancPane.getChildren().add(bullet);
-                System.out.println("askdjbagsd");
             }
-
             try {
                 Thread.sleep(1000);
             } catch (Exception ex) {
