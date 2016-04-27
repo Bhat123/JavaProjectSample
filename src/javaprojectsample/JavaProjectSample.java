@@ -58,34 +58,33 @@ public class JavaProjectSample extends Application {
     static ImageView wall;
     ImageView ground;
     static AnchorPane ancPane;
-    
-    
+
     double posX = 2;
     double posY = 2;
     public static int side = 1;
-    int map[][]={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                 {1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                 {1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                 {1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    int map[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
     public static boolean isMoving = false;
     public static boolean isRotating = false;
-    
+
     private final Rectangle2D TANK_DOWN = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_UP = new Rectangle2D(0, 0, 49, 71);
     private final Rectangle2D TANK_RIGHT = new Rectangle2D(0, 0, 71, 49);
@@ -95,7 +94,7 @@ public class JavaProjectSample extends Application {
     public void start(Stage primaryStage) throws Exception {
         ancPane = new AnchorPane();
         primaryStage.setFullScreen(true);
-        
+
         System.out.println("Modified by HFM");
 //     Rectangle rect = new Rectangle (100, 40, 100, 100);
 //     rect.setArcHeight(50);
@@ -118,7 +117,7 @@ public class JavaProjectSample extends Application {
         imgWall = new Image("file:wall.jpg");
         imgGround = new Image("file:ground.jpg");
         imgStar = new Image("file:star2.png");
-        
+
         star = new ImageView(imgStar);
         star.setFitHeight(70);
         star.setFitWidth(70);
@@ -139,39 +138,34 @@ public class JavaProjectSample extends Application {
 //    tank.setViewport(TANK_DOWN);
 //    tank.setFitHeight(50);
 //    tank.setFitWidth(50);
-        for(int i = 0;i<19;i++){
-            for(int j = 0; j<34;j++){
-                if(map[i][j] == 1){
-                wall = new ImageView(imgWall);
-                wall.setFitHeight(40);
-                wall.setFitWidth(40);
-                wall.setX(posX);
-                wall.setY(posY);
-                ancPane.getChildren().add(wall);
+        for (int i = 0; i < 19; i++) {
+            for (int j = 0; j < 34; j++) {
+                if (map[i][j] == 1) {
+                    wall = new ImageView(imgWall);
+                    wall.setFitHeight(40);
+                    wall.setFitWidth(40);
+                    wall.setX(posX);
+                    wall.setY(posY);
+                    ancPane.getChildren().add(wall);
                 }
-                if(map[i][j] == 0){
-                ground = new ImageView(imgGround);
-                ground.setFitHeight(40);
-                ground.setFitWidth(40);
-                ground.setX(posX);
-                ground.setY(posY);
-                ancPane.getChildren().add(ground);
+                if (map[i][j] == 0) {
+                    ground = new ImageView(imgGround);
+                    ground.setFitHeight(40);
+                    ground.setFitWidth(40);
+                    ground.setX(posX);
+                    ground.setY(posY);
+                    ancPane.getChildren().add(ground);
                 }
-                
-                posX+=40;
-                }
+
+                posX += 40;
+            }
             posX = 2;
-            posY+=40;
+            posY += 40;
         }
-        ancPane.getChildren().addAll(tank,star);
+        ancPane.getChildren().addAll(tank, star);
         Scene scene = new Scene(ancPane, 500, 200, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
-        
-        
-        
-        
-        
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
@@ -189,8 +183,8 @@ public class JavaProjectSample extends Application {
                 }
 //
                 if (keyEvent.getCode().toString() == "W") {
-                  Move mv = new Move("W");
-                  mv.start();
+                    Move mv = new Move("W");
+                    mv.start();
 //                    try {
 //                        mv.join();
 //                    } catch (InterruptedException ex) {
@@ -215,23 +209,11 @@ public class JavaProjectSample extends Application {
 //                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
                 }
-               
 
-                    if (keyEvent.getCode().toString() == "SPACE") {
-                        FireBullet fb = new FireBullet(ancPane, tank);
-                        fb.start();
-//                    try {
-//                        fb.join();
-//                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-                        System.out.println("main");
-                        }
-                    }
-                
-            });
-        
-        
+                FireBullet fb = new FireBullet(keyEvent);
+                fb.start();
+            }
+        });
 
     }
 
@@ -245,14 +227,14 @@ public class JavaProjectSample extends Application {
             @Override
             public void changed(ObservableValue<? extends Bounds> arg0, Bounds oldValue, Bounds newValue) {
                 if (rect1.intersects(newValue)) {
-                    System.out.println("Collide ============= Collide");
-                }
-                else{
-                    System.out.println("NOT collide");
+                    System.out.println("Collide");
+                } else {
+                    System.out.println("---not a collision---");
                 }
             }
         });
     }
+
     public static void main(String[] args) {
         launch(args);
     }

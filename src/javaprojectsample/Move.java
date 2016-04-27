@@ -65,6 +65,7 @@ public class Move extends Thread{
                             });
                             trTank.play();
                             JavaProjectSample.checkCollision(JavaProjectSample.ancPane, JavaProjectSample.wall, JavaProjectSample.tank);
+                            System.out.println("hello");
                         }
                         else{
                             System.out.println("it's moving");
