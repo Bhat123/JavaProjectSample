@@ -5,6 +5,7 @@
  */
 package javaprojectsample;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
@@ -15,6 +16,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
@@ -27,6 +29,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import static javafx.scene.media.MediaPlayer.INDEFINITE;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -214,6 +220,23 @@ public class JavaProjectSample extends Application {
                 fb.start();
             }
         });
+
+        final Task task = new Task() {
+
+            @Override
+            protected Object call() throws Exception {
+//                int s = INDEFINITE;
+                System.out.println("Music version ");
+                String musicFile = "back_music.mp3";     // For example
+
+                Media sound = new Media(new File(musicFile).toURI().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
+                return null;
+            }
+        };
+        Thread thread1 = new Thread(task);
+        thread1.start();
 
     }
 
