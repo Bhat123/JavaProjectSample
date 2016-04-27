@@ -14,6 +14,7 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -231,6 +232,7 @@ public class JavaProjectSample extends Application {
 
                 Media sound = new Media(new File(musicFile).toURI().toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.setCycleCount(AudioClip.INDEFINITE);
                 mediaPlayer.play();
                 return null;
             }
@@ -256,6 +258,80 @@ public class JavaProjectSample extends Application {
                 }
             }
         });
+    }
+
+    static void move(int time, int speed, String direction) {
+        int ySpeed = 0;
+        int xSpeed = 0;
+        if (direction.equals("up")) {
+            ySpeed = speed;
+        } else if (direction.equals("down")) {
+            ySpeed = -1 * speed;
+        } else if (direction.equals("right")) {
+            xSpeed = -1 * speed;
+        } else {
+            xSpeed = speed;
+        }
+        TranslateTransition trTank = new TranslateTransition();
+        trTank.setDuration(Duration.millis(time));
+        trTank.setNode(JavaProjectSample.tank);
+        trTank.setFromY(JavaProjectSample.tank.getTranslateY());
+        trTank.setToY(JavaProjectSample.tank.getTranslateY() - ySpeed);
+        trTank.setFromX(JavaProjectSample.tank.getTranslateX());
+        trTank.setToX(JavaProjectSample.tank.getTranslateX() - xSpeed);
+//        trTank.setAutoReverse(true);
+        JavaProjectSample.isMoving = true;
+        System.out.println("1111 about to move");
+        trTank.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                JavaProjectSample.isMoving = false;
+            }
+        });
+        trTank.play();
+    }
+
+    static void fireOwn(ImageView iv, Image img, int side) {
+        int frX = 0;
+        int frY = 0;
+        int toX = 0;
+        int toY = 0;
+        
+        if (side == 1){
+            frX = 142;
+            frY = 245;
+            toX = 2000;
+            toY = 245;
+        }
+        else if (side == 2){
+            frX = 96;
+            frY = 197;
+            toX = 96;
+            toY = -2000;
+        }
+        else if(side == 3){
+            frX = 47;
+            frY = 244;
+            toX = -2000;
+            toY = 245;
+        }
+        else if (side == 4){
+            frX = 94;
+            frY = 293;
+            toX = 94;
+            toY = +2000;
+        }
+//        iv = new ImageView(img);
+        iv.setFitHeight(20);
+        iv.setFitWidth(20);
+        TranslateTransition trBullet = new TranslateTransition();
+        trBullet.setDuration(Duration.millis(1000));
+        trBullet.setNode(iv);
+        trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + frX);
+        trBullet.setFromY(JavaProjectSample.tank.getTranslateY() + frY);
+        trBullet.setToX(JavaProjectSample.tank.getTranslateX() + toX);
+        trBullet.setToY(JavaProjectSample.tank.getTranslateY() + toY);
+        trBullet.play();
     }
 
     public static void main(String[] args) {

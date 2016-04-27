@@ -50,22 +50,7 @@ public class Move extends Thread{
                         }
                     } else {
                         if(JavaProjectSample.isMoving == false){
-                            TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(300));
-                            trTank.setNode(JavaProjectSample.tank);
-                            trTank.setFromX(JavaProjectSample.tank.getTranslateX());
-                            trTank.setToX(JavaProjectSample.tank.getTranslateX() + 40);
-                            JavaProjectSample.isMoving = true;
-                            System.out.println("1111 about to move");
-                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    JavaProjectSample.isMoving = false;
-                                }
-                            });
-                            trTank.play();
-                            JavaProjectSample.checkCollision(JavaProjectSample.ancPane, JavaProjectSample.wall, JavaProjectSample.tank);
-                            System.out.println("hello");
+                            JavaProjectSample.move(1, 5, "right");
                         }
                         else{
                             System.out.println("it's moving");
@@ -100,21 +85,7 @@ public class Move extends Thread{
                     } else {
                         
                         if(JavaProjectSample.isMoving == false){
-                            TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(1));
-                            trTank.setNode(JavaProjectSample.tank);
-                            trTank.setFromY(JavaProjectSample.tank.getTranslateY());
-                            trTank.setToY(JavaProjectSample.tank.getTranslateY() - 5);
-                            trTank.setAutoReverse(true);
-                            JavaProjectSample.isMoving = true;
-                            System.out.println("1111 about to move");
-                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    JavaProjectSample.isMoving = false;
-                                }
-                            });
-                            trTank.play();
+                            JavaProjectSample.move(1, 5, "up");
                         }
                     }
                 }
@@ -145,21 +116,7 @@ public class Move extends Thread{
                     } else {
                         
                         if(JavaProjectSample.isMoving == false){
-                            TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(1));
-                            trTank.setNode(JavaProjectSample.tank);
-                            trTank.setFromY(JavaProjectSample.tank.getTranslateY());
-                            trTank.setToY(JavaProjectSample.tank.getTranslateY() + 5);
-                            trTank.setAutoReverse(true);
-                            JavaProjectSample.isMoving = true;
-                            System.out.println("1111 about to move");
-                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    JavaProjectSample.isMoving = false;
-                                }
-                            });
-                            trTank.play();
+                            JavaProjectSample.move(1, 5, "down");
                         }
                     }
                 }
@@ -189,21 +146,7 @@ public class Move extends Thread{
                         }
                     } else {
                         if(JavaProjectSample.isMoving == false){
-                            TranslateTransition trTank = new TranslateTransition();
-                            trTank.setDuration(Duration.millis(1));
-                            trTank.setNode(JavaProjectSample.tank);
-                            trTank.setFromX(JavaProjectSample.tank.getTranslateX());
-                            trTank.setToX(JavaProjectSample.tank.getTranslateX() - 5);
-                            trTank.setAutoReverse(true);
-                            JavaProjectSample.isMoving = true;
-                            System.out.println("1111 about to move");
-                            trTank.setOnFinished(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    JavaProjectSample.isMoving = false;
-                                }
-                            });
-                            trTank.play();
+                            JavaProjectSample.move(1, 5, "left");
                         }
                     }
                 }

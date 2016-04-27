@@ -35,44 +35,19 @@ class FireBullet extends Thread {
     @Override
     public void run() {
         System.out.println("Works");
-//        Platform.runLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                ancPane.getChildren().add(bullet);
-//            }
-//        });
         if (keyEvent.getCode().toString() == "SPACE") {
             if (JavaProjectSample.side == 1) {
                 bullet = new ImageView(imgBullet);
-                bullet.setFitHeight(20);
-                bullet.setFitWidth(20);
-                TranslateTransition trBullet = new TranslateTransition();
-                trBullet.setDuration(Duration.millis(1000));
-                trBullet.setNode(bullet);
-                trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + 142);
-                trBullet.setFromY(JavaProjectSample.tank.getTranslateY() + 245);
-                trBullet.setToX(JavaProjectSample.tank.getTranslateX() + 2000);
-                trBullet.setToY(JavaProjectSample.tank.getTranslateY() + 245);
-                trBullet.play();
+                JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         JavaProjectSample.ancPane.getChildren().add(bullet);
                     }
                 });
-                System.out.println("askdjbagsd");
             } else if (JavaProjectSample.side == 2) {
                 bullet = new ImageView(imgBullet);
-                bullet.setFitHeight(20);
-                bullet.setFitWidth(20);
-                TranslateTransition trBullet = new TranslateTransition();
-                trBullet.setDuration(Duration.millis(1000));
-                trBullet.setNode(bullet);
-                trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + 96);
-                trBullet.setFromY(JavaProjectSample.tank.getTranslateY() + 197);
-                trBullet.setToX(JavaProjectSample.tank.getTranslateX() + 96);
-                trBullet.setToY(JavaProjectSample.tank.getTranslateY() - 2000);
-                trBullet.play();
+                JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -82,16 +57,7 @@ class FireBullet extends Thread {
                 System.out.println("askdjbagsd");
             } else if (JavaProjectSample.side == 3) {
                 bullet = new ImageView(imgBullet);
-                bullet.setFitHeight(20);
-                bullet.setFitWidth(20);
-                TranslateTransition trBullet = new TranslateTransition();
-                trBullet.setDuration(Duration.millis(1000));
-                trBullet.setNode(bullet);
-                trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + 47);
-                trBullet.setFromY(JavaProjectSample.tank.getTranslateY() + 244);
-                trBullet.setToY(JavaProjectSample.tank.getTranslateY() + 245);
-                trBullet.setToX(JavaProjectSample.tank.getTranslateX() - 2000);
-                trBullet.play();
+                JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -101,16 +67,7 @@ class FireBullet extends Thread {
                 System.out.println("askdjbagsd");
             } else if (JavaProjectSample.side == 4) {
                 bullet = new ImageView(imgBullet);
-                bullet.setFitHeight(20);
-                bullet.setFitWidth(20);
-                TranslateTransition trBullet = new TranslateTransition();
-                trBullet.setDuration(Duration.millis(1000));
-                trBullet.setNode(bullet);
-                trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + 94);
-                trBullet.setFromY(JavaProjectSample.tank.getTranslateY() + 293);
-                trBullet.setToX(JavaProjectSample.tank.getTranslateX() + 94);
-                trBullet.setToY(JavaProjectSample.tank.getTranslateY() + 2000);
-                trBullet.play();
+                JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
