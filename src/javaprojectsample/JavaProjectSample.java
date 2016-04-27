@@ -6,6 +6,7 @@
 package javaprojectsample;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
@@ -59,7 +60,9 @@ public class JavaProjectSample extends Application {
     Image imgGround;
     Image imgStar;
     Image imgHouse;
+    Image imgReGround;
     ImageView star;
+    ImageView ReGround;
     ImageView house;
     Image imgTree;
     ImageView tree;
@@ -69,11 +72,13 @@ public class JavaProjectSample extends Application {
     static ImageView wall;
     ImageView ground;
     static AnchorPane ancPane;
-
+    boolean collide = false;
+            ;
     double posX = 2;
     double posY = 2;
     public static int side = 1;
-    int map[][] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    int map[][] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
@@ -84,7 +89,7 @@ public class JavaProjectSample extends Application {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
@@ -93,6 +98,7 @@ public class JavaProjectSample extends Application {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
+    ArrayList<ImageView> imageTreeMap = new ArrayList<ImageView>();
     public static boolean isMoving = false;
     public static boolean isRotating = false;
 
@@ -107,6 +113,7 @@ public class JavaProjectSample extends Application {
         primaryStage.setFullScreen(true);
 
         System.out.println("Modified by HFM");
+        imgReGround = new Image("file:reground.jpg");
         imgHouse = new Image("file:house.png");
         imgHead = new Image("file:green_head.png");
         imgFile = new Image("file:final_body.png");
@@ -148,7 +155,7 @@ public class JavaProjectSample extends Application {
                     wall.setY(posY);
                     ancPane.getChildren().add(wall);
                 }
-                if (map[i][j] == 0 || map[i][j] == 3 || map[i][j] == 4) {
+                if (map[i][j] == 0 || map[i][j] == 3) {
                     ground = new ImageView(imgGround);
                     ground.setFitHeight(40);
                     ground.setFitWidth(40);
@@ -163,6 +170,7 @@ public class JavaProjectSample extends Application {
                     tree.setX(posX);
                     tree.setY(posY);
                     ancPane.getChildren().add(tree);
+                    imageTreeMap.add(tree);
                 }
                 
                 
@@ -176,8 +184,8 @@ public class JavaProjectSample extends Application {
         Scene scene = new Scene(ancPane, 500, 200, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
-        Enemy thread1 = new Enemy();
-        thread1.start();
+//        Enemy thread1 = new Enemy();
+//        thread1.start();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
@@ -186,41 +194,46 @@ public class JavaProjectSample extends Application {
                 System.out.println(tank.getTranslateY() + ": Y");
                 if (keyEvent.getCode().toString() == "D") {
                     Move mv = new Move("D");
-                    mv.start();
+                    if(tank.getTranslateX()+60>1225){}
+                    else{mv.start();}
+                    for(int i = 0; i<55;i++){
+                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                            imageTreeMap.get(i).setImage(imgReGround);
+                        };
+                    }
                     
-//                    try {
-//                        mv.join();
-//                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
                 }
 //
                 if (keyEvent.getCode().toString() == "W") {
+                    
                     Move mv = new Move("W");
-                    mv.start();
-//                    try {
-//                        mv.join();
-//                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
+                    if(tank.getTranslateY()+230<67){collide = true;}
+                    else{mv.start();}
+                    for(int i = 0; i<55;i++){
+                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                            imageTreeMap.get(i).setImage(imgReGround);
+                        };
+                    }
                 }
                 if (keyEvent.getCode().toString() == "S") {
                     Move mv = new Move("S");
-                    mv.start();
-//                    try {
-//                        mv.join();
-//                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
+                    if(tank.getTranslateY()+230>645){collide = true;}
+                    else{mv.start();}
+                    for(int i = 0; i<55;i++){
+                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                            imageTreeMap.get(i).setImage(imgReGround);
+                        };
+                    }
                 }
                 if (keyEvent.getCode().toString() == "A") {
                     Move mv = new Move("A");
-                    mv.start();
-//                    try {
-//                        mv.join();
-//                    } catch (InterruptedException ex) {
-//                        Logger.getLogger(JavaProjectSample.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
+                    if(tank.getTranslateX()+60<50){collide = true;}
+                    else{mv.start();}
+                    for(int i = 0; i<55;i++){
+                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                            imageTreeMap.get(i).setImage(imgReGround);
+                        };
+                    }
                 }
 
                 FireBullet fb = new FireBullet(keyEvent);
