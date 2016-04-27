@@ -43,13 +43,14 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.RED;
+//import static javaprojectsample.FireBullet.bullet;
 
 /**
  *
  * @author hiyandao101
  */
 public class JavaProjectSample extends Application {
-
+    static int length = 55;
     Image imgFile;
     Image imgHead;
     Image imgFileU;
@@ -60,7 +61,8 @@ public class JavaProjectSample extends Application {
     Image imgGround;
     Image imgStar;
     Image imgHouse;
-    Image imgReGround;
+    public static boolean isFiring = false;
+    public static Image imgReGround;
     ImageView star;
     ImageView ReGround;
     ImageView house;
@@ -68,37 +70,37 @@ public class JavaProjectSample extends Application {
     ImageView tree;
     static ImageView tank;
     ImageView head;
-    ImageView bullet;
+    static ImageView bullet;
     static ImageView wall;
     ImageView ground;
     static AnchorPane ancPane;
     boolean collide = false;
-            ;
+    ;
     double posX = 2;
     double posY = 2;
     public static int side = 1;
     int map[][] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
-    ArrayList<ImageView> imageTreeMap = new ArrayList<ImageView>();
+    public static ArrayList<ImageView> imageTreeMap = new ArrayList<ImageView>();
     public static boolean isMoving = false;
     public static boolean isRotating = false;
 
@@ -124,7 +126,7 @@ public class JavaProjectSample extends Application {
         imgGround = new Image("file:ground.jpg");
         imgStar = new Image("file:star2.png");
         imgTree = new Image("file:tree.png");
-        
+
         star = new ImageView(imgStar);
         star.setFitHeight(70);
         star.setFitWidth(70);
@@ -172,8 +174,6 @@ public class JavaProjectSample extends Application {
                     ancPane.getChildren().add(tree);
                     imageTreeMap.add(tree);
                 }
-                
-                
 
                 posX += 40;
             }
@@ -181,6 +181,9 @@ public class JavaProjectSample extends Application {
             posY += 40;
         }
         ancPane.getChildren().addAll(tank);
+
+//        bullet.setX(-100);
+//        bullet.setY(-100);
         Scene scene = new Scene(ancPane, 500, 200, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -194,52 +197,89 @@ public class JavaProjectSample extends Application {
                 System.out.println(tank.getTranslateY() + ": Y");
                 if (keyEvent.getCode().toString() == "D") {
                     Move mv = new Move("D");
-                    if(tank.getTranslateX()+60>1225){}
-                    else{mv.start();}
-                    for(int i = 0; i<55;i++){
-                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                    if (tank.getTranslateX() + 60 > 1225) {
+                    } else {
+                        mv.start();
+                    }
+                    for (int i = 0; i < 55; i++) {
+                        if (imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())) {
                             imageTreeMap.get(i).setImage(imgReGround);
                         };
                     }
-                    
+
                 }
 //
                 if (keyEvent.getCode().toString() == "W") {
-                    
+
                     Move mv = new Move("W");
-                    if(tank.getTranslateY()+230<67){collide = true;}
-                    else{mv.start();}
-                    for(int i = 0; i<55;i++){
-                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                    if (tank.getTranslateY() + 230 < 67) {
+                        collide = true;
+                    } else {
+                        mv.start();
+                    }
+                    for (int i = 0; i < 55; i++) {
+                        if (imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())) {
                             imageTreeMap.get(i).setImage(imgReGround);
                         };
                     }
                 }
                 if (keyEvent.getCode().toString() == "S") {
                     Move mv = new Move("S");
-                    if(tank.getTranslateY()+230>645){collide = true;}
-                    else{mv.start();}
-                    for(int i = 0; i<55;i++){
-                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                    if (tank.getTranslateY() + 230 > 645) {
+                        collide = true;
+                    } else {
+                        mv.start();
+                    }
+                    for (int i = 0; i < 55; i++) {
+                        if (imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())) {
                             imageTreeMap.get(i).setImage(imgReGround);
                         };
                     }
                 }
                 if (keyEvent.getCode().toString() == "A") {
                     Move mv = new Move("A");
-                    if(tank.getTranslateX()+60<50){collide = true;}
-                    else{mv.start();}
-                    for(int i = 0; i<55;i++){
-                        if(imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())){
+                    if (tank.getTranslateX() + 60 < 50) {
+                        collide = true;
+                    } else {
+                        mv.start();
+                    }
+                    for (int i = 0; i < 55; i++) {
+                        if (imageTreeMap.get(i).getBoundsInParent().intersects(tank.getBoundsInParent())) {
                             imageTreeMap.get(i).setImage(imgReGround);
                         };
                     }
                 }
+                if (keyEvent.getCode().toString() == "SPACE") {
+//                    ancPane.getChildren().add(bullet);
+                    if (JavaProjectSample.side == 1) {
+//                bullet = new ImageView(imgBullet);
+                        JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
 
-                FireBullet fb = new FireBullet(keyEvent);
-                fb.start();
+                    } else if (JavaProjectSample.side == 2) {
+//                bullet = new ImageView(imgBullet);
+                        JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
+//                        JavaProjectSample.ancPane.getChildren().add(bullet);
+                    } else if (JavaProjectSample.side == 3) {
+//                bullet = new ImageView(imgBullet);
+                        JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
+//                        JavaProjectSample.ancPane.getChildren().add(bullet);
+                    } else if (JavaProjectSample.side == 4) {
+//                bullet = new ImageView(imgBullet);
+                        JavaProjectSample.fireOwn(bullet, imgBullet, JavaProjectSample.side);
+//                        JavaProjectSample.ancPane.getChildren().add(bullet);
+//            try {
+//                Thread.sleep(10);
+//            } catch (Exception ex) {
+//                Logger.getLogger(FireBullet.class
+//                        .getName()).log(Level.SEVERE, null, ex);
+//                System.out.println(ex);
+//            }
+                    }
+                }
             }
         });
+        Checker check = new Checker();
+        check.start();
 
 //        final Task task = new Task() {
 //
@@ -256,7 +296,6 @@ public class JavaProjectSample extends Application {
 //        };
 //        Thread thread1 = new Thread(task);
 //        thread1.start();
-        
     }
 
     /**
@@ -289,6 +328,7 @@ public class JavaProjectSample extends Application {
         } else {
             xSpeed = speed;
         }
+
         TranslateTransition trTank = new TranslateTransition();
         trTank.setDuration(Duration.millis(time));
         trTank.setNode(JavaProjectSample.tank);
@@ -309,30 +349,29 @@ public class JavaProjectSample extends Application {
     }
 
     static void fireOwn(ImageView iv, Image img, int side) {
+//        ancPane.getChildren().add(bullet);
+
         int frX = 0;
         int frY = 0;
         int toX = 0;
         int toY = 0;
-        
-        if (side == 1){
+
+        if (side == 1) {
             frX = 142;
             frY = 245;
             toX = 2000;
             toY = 245;
-        }
-        else if (side == 2){
+        } else if (side == 2) {
             frX = 96;
             frY = 197;
             toX = 96;
             toY = -2000;
-        }
-        else if(side == 3){
+        } else if (side == 3) {
             frX = 47;
             frY = 244;
             toX = -2000;
             toY = 245;
-        }
-        else if (side == 4){
+        } else if (side == 4) {
             frX = 94;
             frY = 293;
             toX = 94;
@@ -340,14 +379,29 @@ public class JavaProjectSample extends Application {
         }
         iv.setFitHeight(20);
         iv.setFitWidth(20);
-        TranslateTransition trBullet = new TranslateTransition();
-        trBullet.setDuration(Duration.millis(1000));
-        trBullet.setNode(iv);
-        trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + frX);
-        trBullet.setFromY(JavaProjectSample.tank.getTranslateY() + frY);
-        trBullet.setToX(JavaProjectSample.tank.getTranslateX() + toX);
-        trBullet.setToY(JavaProjectSample.tank.getTranslateY() + toY);
-        trBullet.play();
+        if (isFiring == false) {
+            isFiring = true;
+            TranslateTransition trBullet = new TranslateTransition();
+            trBullet.setDuration(Duration.millis(3000));
+            trBullet.setNode(iv);
+            trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + frX);
+            trBullet.setFromY(JavaProjectSample.tank.getTranslateY() + frY);
+            trBullet.setToX(JavaProjectSample.tank.getTranslateX() + toX);
+            trBullet.setToY(JavaProjectSample.tank.getTranslateY() + toY);
+            trBullet.setOnFinished(e -> isFiring = false);
+            trBullet.play();
+            ancPane.getChildren().add(bullet);
+        }
+//        while(true){
+//        for (int i = 0; i < 55; i++) {
+//            if (imageTreeMap.get(i).getBoundsInParent().intersects(iv.getBoundsInParent())) {
+//                System.out.println("Boom");
+//                imageTreeMap.get(i).setImage(imgReGround);
+//                imageTreeMap.remove(imageTreeMap.get(i));
+//                ancPane.getChildren().remove(bullet);
+//            }
+//        }
+//        }
     }
 
     public static void main(String[] args) {
