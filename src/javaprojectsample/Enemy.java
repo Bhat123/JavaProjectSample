@@ -17,11 +17,11 @@ public class Enemy extends Thread {
     @Override
     public void run() {
         Tank enemy = new Tank(700, 500);
-        while (true) {
+//        while (true) {
             if (enemy.y > JavaProjectSample.tank.getY()) {
                 enemy.rotate(2);
                 while (enemy.y + enemy.eTank.getTranslateY() - JavaProjectSample.tank.getY() - JavaProjectSample.tank.getTranslateY() > 20) {
-                    enemy.move(1, 10);
+                    enemy.move(1, 3);
                     System.out.println("enemy " + enemy.eTank.getTranslateY());
                     System.out.println("mine " + JavaProjectSample.tank.getY());
                 }
@@ -34,6 +34,6 @@ public class Enemy extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Enemy.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+//        }
     }
 }
