@@ -57,10 +57,12 @@ public class Enemy extends Thread {
             }
             else{
                 System.out.println("3rd case");
-                enemy.fire();
+                for(int i = 0; i < 10; i++){
+                    enemy.fire();
+                }
                 Thread.sleep(1000);
             }
-            while(true){
+            while(Math.abs(JavaProjectSample.tank.getX() + JavaProjectSample.tank.getTranslateX() - enemy.x - enemy.eTank.getTranslateX()) > 100){
                 if(Math.abs(JavaProjectSample.tank.getY() + JavaProjectSample.tank.getTranslateY() - enemy.y - enemy.eTank.getTranslateY()) > 70){
                     System.out.println("worked");
                     break;

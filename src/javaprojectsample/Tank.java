@@ -50,20 +50,20 @@ public class Tank {
         int toY = 0;
 
         if (side == 1) {
-            frX = 142;
-            frY = 245;
+            frX = (int)eTank.getTranslateX()+110;
+            frY = (int)eTank.getTranslateY()+15;
             toX = 2000;
-            toY = 245;
+            toY = (int)eTank.getTranslateY();
         } else if (side == 2) {
-            frX = 96;
-            frY = 197;
-            toX = 96;
+            frX = (int)eTank.getTranslateX();
+            frY = (int)eTank.getTranslateY();
+            toX = (int)eTank.getTranslateX();
             toY = -2000;
         } else if (side == 3) {
-            frX = -110;
-            frY = 18;
+            frX = (int)eTank.getTranslateX()-20;
+            frY = (int)eTank.getTranslateY()+17;
             toX = -2000;
-            toY = 18;
+            toY = (int)eTank.getTranslateY();
         } else if (side == 4) {
             frX = 94;
             frY = 293;
