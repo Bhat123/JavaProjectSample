@@ -25,12 +25,15 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -43,6 +46,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.RED;
+import static javaprojectsample.JavaProjectSample.boom;
 //import static javaprojectsample.FireBullet.bullet;
 
 /**
@@ -50,17 +54,38 @@ import static javafx.scene.paint.Color.RED;
  * @author hiyandao101
  */
 public class JavaProjectSample extends Application {
+    
+    public static void interpolate(){
+    for(int i =0;i<4;i++){
+        for(int j =0;i<5;j++){
+//            boom.setViewport(new Rectangle2D(x, y, 60, 60));
+            imageTreeMap.get(i).setViewport(new Rectangle2D(x, y, 60, 60));
+            
+            x+=60;
+        }
+        y+=60;
+    }
+    
+    }
+    
     static int length = 55;
     Image imgFile;
     Image imgHead;
     Image imgFileU;
     Image imgFileR;
     Image imgFileL;
-    Image imgBullet;
+    static Image imgBullet;
     Image imgWall;
     Image imgGround;
     Image imgStar;
     Image imgHouse;
+    
+    static int x;
+    static int y;
+    public static final Rectangle2D BOOM = new Rectangle2D(x, y, 60, 60);
+    static Image imgSprite = new Image("file:boom.png");
+    static ImageView boom = new ImageView(imgSprite);
+    
     public static boolean isFiring = false;
     public static Image imgReGround;
     ImageView star;
@@ -74,8 +99,11 @@ public class JavaProjectSample extends Application {
     static ImageView wall;
     ImageView ground;
     static AnchorPane ancPane;
+    static VBox root;
+//    static StackPane rootMain;
+    static TranslateTransition trBullet;
     boolean collide = false;
-    ;
+    Scene scene1,scene2;
     double posX = 2;
     double posY = 2;
     public static int side = 1;
@@ -112,6 +140,16 @@ public class JavaProjectSample extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ancPane = new AnchorPane();
+        root = new VBox();
+        
+        Label lb1 = new Label("NEW");
+        Label lb2 = new Label("EXIT");
+        root.getChildren().addAll(lb2,lb1);
+//        rootMain.getChildren().add(root);
+//        root.getChildren().add(lb);
+        
+        
+        
         primaryStage.setFullScreen(true);
 
         System.out.println("Modified by HFM");
@@ -184,17 +222,37 @@ public class JavaProjectSample extends Application {
 
 //        bullet.setX(-100);
 //        bullet.setY(-100);
-        Scene scene = new Scene(ancPane, 500, 200, Color.BLACK);
-        primaryStage.setScene(scene);
+        lb1.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setScene(scene2);
+                primaryStage.setFullScreen(true);
+            }
+        });
+        lb2.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.close();
+                System.exit(0);
+            }
+        });
+
+        scene1 = new Scene(root, 500, 200);
+        scene1.setFill(RED);
+        scene2 = new Scene(ancPane,500,200, Color.BLACK);
+        primaryStage.setScene(scene1);
         primaryStage.show();
-        Enemy thread1 = new Enemy(500, 600);
-        thread1.start();
+//        Enemy thread1 = new Enemy(500, 600);
+//        thread1.start();
 //        Enemy thread2 = new Enemy(500, 300);
 //        thread2.start();
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        scene2.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode().toString() == "ESCAPE") {
+                    System.exit(0);
+                }
                 System.out.println(tank.getTranslateX() + ": X");
                 System.out.println(tank.getTranslateY() + ": Y");
                 if (keyEvent.getCode().toString() == "D") {
@@ -383,7 +441,7 @@ public class JavaProjectSample extends Application {
         iv.setFitWidth(20);
         if (isFiring == false) {
             isFiring = true;
-            TranslateTransition trBullet = new TranslateTransition();
+            trBullet = new TranslateTransition();
             trBullet.setDuration(Duration.millis(3000));
             trBullet.setNode(iv);
             trBullet.setFromX(JavaProjectSample.tank.getTranslateX() + frX);
@@ -392,6 +450,7 @@ public class JavaProjectSample extends Application {
             trBullet.setToY(JavaProjectSample.tank.getTranslateY() + toY);
             trBullet.setOnFinished(e -> isFiring = false);
             trBullet.play();
+           
             ancPane.getChildren().add(bullet);
         }
 //        while(true){
